@@ -42,11 +42,16 @@ public class RoleModel {
 	}
 
 //add method
-	public long add(RoleBean bean) throws ApplicationException, DuplicateRecordException {
+	public long add(RoleBean bean) throws ApplicationException, DuplicateRecordException, SQLException {
 
 		Connection conn = null;
 		int pk = 0;
 
+		RoleBean existbean = findByName(bean.getName());
+
+		if (existbean != null) {
+			throw new DuplicateRecordException("role already exists");
+		}
 		try {
 			pk = nextPk();
 			conn = JDBCDataSource.getConnection();
@@ -80,6 +85,12 @@ public class RoleModel {
 	public void update(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
+
+		RoleBean existBean = findByName(bean.getName());
+		
+		if (existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("Role already exists");
+		}
 
 		try {
 			conn = JDBCDataSource.getConnection();
@@ -133,12 +144,14 @@ public class RoleModel {
 		}
 	}
 
-	public RoleBean findByName(String name) throws SQLException {
+	public RoleBean findByName(String name) throws ApplicationException {
 
 		StringBuffer sql = new StringBuffer("select * from st_role where name = ?");
 		RoleBean bean = null;
 
-		Connection conn = JDBCDataSource.getConnection();
+		Connection conn = null;
+		try {
+		conn = JDBCDataSource.getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 		pstmt.setString(1, name);
 		ResultSet rs = pstmt.executeQuery();
@@ -155,12 +168,16 @@ public class RoleModel {
 		}
 		rs.close();
 		pstmt.close();
+		} catch (Exception e){
+			throw new ApplicationException("Exception: Exception in getting User by Role");
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+		}
 
-		JDBCDataSource.closeConnection(conn);
+		
 		return bean;
 	}
-	
-	
+
 	public RoleBean findByPk(long pk) throws ApplicationException {
 
 		RoleBean bean = null;
@@ -193,8 +210,6 @@ public class RoleModel {
 		return bean;
 	}
 
-	
-	
 	public List<RoleBean> list() throws ApplicationException {
 		return search(null, 0, 0);
 	}
