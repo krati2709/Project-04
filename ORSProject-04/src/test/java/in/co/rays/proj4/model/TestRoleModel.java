@@ -22,20 +22,21 @@ public class TestRoleModel {
 //		testDelete();
 //		testFindByName();
 //		testFindByPk();
-		try {
-			testSearch();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+//		try {
+//			testSearch();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 
 	public static void testAdd() {
 
 		RoleBean bean = new RoleBean();
-		bean.setName("Kiosk");
-		bean.setDescription("Kiosk");
+		bean.setName("hr");
+		bean.setDescription("hr");
 		bean.setCreatedBy("admin");
 		bean.setModifiedBy("admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
@@ -57,7 +58,7 @@ public class TestRoleModel {
 		try {
 			RoleModel model = new RoleModel();
 			RoleBean bean = model.findByPk(2);
-			bean.setDescription("Student");
+			bean.setDescription("student");
 			model.update(bean);
 			System.out.println("data updated successfully");
 		} catch (Exception e) {

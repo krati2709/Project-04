@@ -15,9 +15,9 @@ public class TestCollegeModel {
 
 //		testAdd();
 //		testUpdate();
-//		testDelete();
+		testDelete();
 //		testFindByName();
-		testSearch();
+//		testSearch();
 	}
 
 	public static void testAdd() {
@@ -25,8 +25,8 @@ public class TestCollegeModel {
 		CollegeBean bean = new CollegeBean();
 		CollegeModel model = new CollegeModel();
 
-		bean.setName("SD Bansal");
-		bean.setAddress("AB Road, Indore");
+		bean.setName("prestige");
+		bean.setAddress("Indore");
 		bean.setState("MP");
 		bean.setCity("Indore");
 		bean.setPhoneNo("9898989898");
@@ -52,11 +52,12 @@ public class TestCollegeModel {
 
 		try {
 			CollegeModel model = new CollegeModel();
-			CollegeBean bean = model.findByPk(2);
+			CollegeBean bean = model.findByPk(3);
 
 			bean.setAddress("rau, indore");
 
 			model.update(bean);
+			System.out.println("data updated successfully");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,7 +70,7 @@ public class TestCollegeModel {
 		CollegeModel model = new CollegeModel();
 		CollegeBean bean = new CollegeBean();
 
-		bean.setId(2);
+		bean.setId(4);
 		try {
 			model.delete(bean);
 			System.out.println("data deleted successfully");
@@ -116,7 +117,6 @@ public class TestCollegeModel {
 		CollegeModel model = new CollegeModel();
 		CollegeBean bean = new CollegeBean();
 		bean.setName("i");
-	//
 		
 		List list = model.search(bean, 1, 5);
 		Iterator<CollegeBean> it = list.iterator();

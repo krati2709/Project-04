@@ -61,7 +61,7 @@ public class HTMLUtility {
 
 	public static void testGetListByMap() {
 
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("male", "male");
 		map.put("female", "female");
 

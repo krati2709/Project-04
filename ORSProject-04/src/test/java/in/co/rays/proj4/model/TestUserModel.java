@@ -17,9 +17,9 @@ public class TestUserModel {
 		
 //		testAdd();
 //		testUpdate();
-//		testDelete();
-//		testFindByLogin();
-		testSearch();
+		testDelete();
+//testFindByLogin();
+//		testSearch();
 	}
 	
 	public static void testAdd() throws ParseException {
@@ -70,7 +70,7 @@ public class TestUserModel {
 		UserBean bean = new UserBean();
 		UserModel model = new UserModel();
 
-		bean.setId(2);
+		bean.setId(1);
 		try {
 			model.delete(bean);
 			System.out.println("data deleted successfully");

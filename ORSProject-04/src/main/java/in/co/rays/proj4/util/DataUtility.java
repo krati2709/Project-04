@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DataUtility {
 
-	public static final String APP_DATE_FORMAT = "dd-MM-yyyy";
+	public static final String APP_DATE_FORMAT = "dd-MM-yyyy"; //yy mm dd
 
 	public static final String APP_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
 

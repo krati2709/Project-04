@@ -14,12 +14,12 @@ import in.co.rays.proj4.exception.ApplicationException;
 public class TestSubjectModel {
 	public static void main(String[] args) throws Exception {
 		
-		testAdd();
+//		testAdd();
 //		testUpdate();
 //		testDelete();
 //		testFindByPk();
 //		testFindByName();
-//		testSearch();
+		testSearch();
 		
 	}
 	
@@ -28,7 +28,7 @@ public class TestSubjectModel {
 		SubjectModel model = new SubjectModel();
 		SubjectBean bean = new SubjectBean();
 		
-		bean.setName("Engineering Physics");
+		bean.setName("Engineering chemistry");
 		bean.setCourseId(1);
 		bean.setDescription("engineering physics");
 		bean.setCreatedBy("admin");
@@ -46,7 +46,7 @@ public class TestSubjectModel {
 		SubjectModel model = new SubjectModel();
 		SubjectBean bean = model.findByPk(1);
 		
-		bean.setDescription("Engineering Mathematics 1");
+		bean.setDescription("Engineering maths 1");
 		model.update(bean);
 		System.out.println("data updated successfully");
 		
@@ -98,7 +98,7 @@ public class TestSubjectModel {
 
 		SubjectModel model = new SubjectModel();
 		SubjectBean bean = new SubjectBean();
-		bean.setName("b");
+		bean.setName("e");
 
 		List list = model.search(bean, 1, 5);
 		Iterator<SubjectBean> it = list.iterator();
