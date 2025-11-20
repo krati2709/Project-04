@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="in.co.rays.proj4.controller.LoginCtl"%>
 <%@page import="in.co.rays.proj4.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -22,13 +23,29 @@
 		(<%=session.getAttribute("role")%>)
 	</h3>
 
-	<a href="#"><b>Add User</b></a>
+	<a href="<%=ORSView.USER_CTL%>"><b>Add User</b></a>
 	<b>|</b>
 	<a href="#"><b>User List</b></a>
 	<b>|</b>
-	<a href="#"><b>Add Role</b></a>
+	<a href="<%=ORSView.ROLE_CTL%>"><b>Add Role</b></a>
 	<b>|</b>
 	<a href="#"><b>Role List</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.COLLEGE_CTL%>"><b>Add College</b></a>
+	<b>|</b>
+	<a href="#"><b>College List</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.STUDENT_CTL%>"><b>Add Student</b></a>
+	<b>|</b>
+	<a href="#"><b>Student List</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.COURSE_CTL%>"><b>Add Course</b></a>
+	<b>|</b>
+	<a href="#"><b>Course List</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.SUBJECT_CTL%>"><b>Add Subject</b></a>
+	<b>|</b>
+	<a href="#"><b>Subject List</b></a>
 	<b>|</b>
 	<a href="LoginCtl?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 	<%
