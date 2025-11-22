@@ -47,9 +47,9 @@
 	<b>|</b>
 	<a href="<%=ORSView.SUBJECT_LIST_CTL%>"><b>Subject List</b></a>
 	<b>|</b>
-	<a href="<%=ORSView.FACULTY_CTL%>"><b>Add Subject</b></a>
+	<a href="<%=ORSView.FACULTY_CTL%>"><b>Add faculty</b></a>
 	<b>|</b>
-	<a href="<%=ORSView.FACULTY_LIST_CTL%>"><b>Subject List</b></a>
+	<a href="<%=ORSView.FACULTY_LIST_CTL%>"><b>faculty List</b></a>
 	<b>|</b>
 	<a href="LoginCtl?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 	<%
