@@ -47,9 +47,17 @@
 	<b>|</b>
 	<a href="<%=ORSView.SUBJECT_LIST_CTL%>"><b>Subject List</b></a>
 	<b>|</b>
+	<a href="<%=ORSView.MARKSHEET_CTL%>"><b>Add Marksheet</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.MARKSHEET_LIST_CTL%>"><b>Marksheet List</b></a>
+	<b>|</b>
 	<a href="<%=ORSView.FACULTY_CTL%>"><b>Add faculty</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.FACULTY_LIST_CTL%>"><b>faculty List</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.TIMETABLE_CTL%>"><b>Add Timetable</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.TIMETABLE_LIST_CTL%>"><b>Timetable List</b></a>
 	<b>|</b>
 	<a href="LoginCtl?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 	<%
