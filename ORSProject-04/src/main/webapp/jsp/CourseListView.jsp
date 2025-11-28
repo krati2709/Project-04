@@ -85,7 +85,7 @@
                     <td style="text-align: center; text-transform: capitalize;"><%=bean.getDuration()%></td>
                     <td style="text-align: center; text-transform: capitalize;"><%=bean.getDescription()%></td>
                     <td style="text-align: center;">
-                        <a href="CourseCtl?id=<%=bean.getId()%>">Edit</a>
+                        <a href="<%=ORSView.COURSE_CTL%>?id=<%=bean.getId()%>">Edit</a>
                     </td>
                 </tr>
                 <%
