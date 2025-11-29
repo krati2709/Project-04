@@ -63,8 +63,15 @@
 	<a href="<%=ORSView.TIMETABLE_CTL%>"><b>Add Timetable</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.TIMETABLE_LIST_CTL%>"><b>Timetable List</b></a>
+	<a href="<%=ORSView.DEPARTMENT_CTL%>"><b>Add Department</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.DEPARTMENT_LIST_CTL%>"><b>Department List</b></a>
+	<b>|</b>
+
 	<b>|</b>
 	<a href="<%=ORSView.MY_PROFILE_CTL%>"><b>My Profile</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.CHANGE_PASSWORD_CTL%>"><b>change password</b></a>
 	<b>|</b>
 	<a href="LoginCtl?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 	<%
