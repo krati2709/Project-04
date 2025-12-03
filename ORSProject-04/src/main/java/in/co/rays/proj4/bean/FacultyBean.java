@@ -2,127 +2,289 @@ package in.co.rays.proj4.bean;
 
 import java.util.Date;
 
-public class FacultyBean extends BaseBean{
+/**
+ * FacultyBean represents a faculty member in the system.
+ * It extends BaseBean and contains personal, contact, and
+ * academic details including college, course, and subject information.
+ * Also provides key-value representation for dropdowns.
+ * 
+ * Note: getKey() and getValue() methods are currently returning null
+ * and should be implemented as needed.
+ * 
+ * @author Krati
+ * @version 1.0
+ */
+public class FacultyBean extends BaseBean {
 
-	private String firstName;
-	private String lastName;
-	private Date dob;
-	private String gender;
-	private String mobileNo;
-	private String email;
-	private long collegeId;
-	private String collegeName;
-	private long courseId;
-	private String courseName;
-	private long subjectId;
-	private String subjectName;
+    /** First name of the faculty member */
+    private String firstName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    /** Last name of the faculty member */
+    private String lastName;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    /** Date of birth of the faculty member */
+    private Date dob;
 
-	public String getLastName() {
-		return lastName;
-	}
+    /** Gender of the faculty member */
+    private String gender;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    /** Mobile number of the faculty member */
+    private String mobileNo;
 
-	public Date getDob() {
-		return dob;
-	}
+    /** Email of the faculty member */
+    private String email;
 
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
+    /** College ID where the faculty works */
+    private long collegeId;
 
-	public String getGender() {
-		return gender;
-	}
+    /** College name where the faculty works */
+    private String collegeName;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    /** Course ID assigned to the faculty */
+    private long courseId;
 
-	public String getMobileNo() {
-		return mobileNo;
-	}
+    /** Course name assigned to the faculty */
+    private String courseName;
 
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
+    /** Subject ID assigned to the faculty */
+    private long subjectId;
 
-	public String getEmail() {
-		return email;
-	}
+    /** Subject name assigned to the faculty */
+    private String subjectName;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Returns the first name of the faculty member.
+     * 
+     * @return firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public long getCollegeId() {
-		return collegeId;
-	}
+    /**
+     * Sets the first name of the faculty member.
+     * 
+     * @param firstName the first name to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setCollegeId(long collegeId) {
-		this.collegeId = collegeId;
-	}
+    /**
+     * Returns the last name of the faculty member.
+     * 
+     * @return lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getCollegeName() {
-		return collegeName;
-	}
+    /**
+     * Sets the last name of the faculty member.
+     * 
+     * @param lastName the last name to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
-	}
+    /**
+     * Returns the date of birth of the faculty member.
+     * 
+     * @return dob
+     */
+    public Date getDob() {
+        return dob;
+    }
 
-	public long getCourseId() {
-		return courseId;
-	}
+    /**
+     * Sets the date of birth of the faculty member.
+     * 
+     * @param dob the date of birth to set
+     */
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
 
-	public void setCourseId(long courseId) {
-		this.courseId = courseId;
-	}
+    /**
+     * Returns the gender of the faculty member.
+     * 
+     * @return gender
+     */
+    public String getGender() {
+        return gender;
+    }
 
-	public String getCourseName() {
-		return courseName;
-	}
+    /**
+     * Sets the gender of the faculty member.
+     * 
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
+    /**
+     * Returns the mobile number of the faculty member.
+     * 
+     * @return mobileNo
+     */
+    public String getMobileNo() {
+        return mobileNo;
+    }
 
-	public long getSubjectId() {
-		return subjectId;
-	}
+    /**
+     * Sets the mobile number of the faculty member.
+     * 
+     * @param mobileNo the mobile number to set
+     */
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
 
-	public void setSubjectId(long subjectId) {
-		this.subjectId = subjectId;
-	}
+    /**
+     * Returns the email of the faculty member.
+     * 
+     * @return email
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public String getSubjectName() {
-		return subjectName;
-	}
+    /**
+     * Sets the email of the faculty member.
+     * 
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
-	}
+    /**
+     * Returns the college ID of the faculty member.
+     * 
+     * @return collegeId
+     */
+    public long getCollegeId() {
+        return collegeId;
+    }
 
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Sets the college ID of the faculty member.
+     * 
+     * @param collegeId the college ID to set
+     */
+    public void setCollegeId(long collegeId) {
+        this.collegeId = collegeId;
+    }
 
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Returns the college name of the faculty member.
+     * 
+     * @return collegeName
+     */
+    public String getCollegeName() {
+        return collegeName;
+    }
 
+    /**
+     * Sets the college name of the faculty member.
+     * 
+     * @param collegeName the college name to set
+     */
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
 
+    /**
+     * Returns the course ID assigned to the faculty member.
+     * 
+     * @return courseId
+     */
+    public long getCourseId() {
+        return courseId;
+    }
 
+    /**
+     * Sets the course ID assigned to the faculty member.
+     * 
+     * @param courseId the course ID to set
+     */
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+
+    /**
+     * Returns the course name assigned to the faculty member.
+     * 
+     * @return courseName
+     */
+    public String getCourseName() {
+        return courseName;
+    }
+
+    /**
+     * Sets the course name assigned to the faculty member.
+     * 
+     * @param courseName the course name to set
+     */
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    /**
+     * Returns the subject ID assigned to the faculty member.
+     * 
+     * @return subjectId
+     */
+    public long getSubjectId() {
+        return subjectId;
+    }
+
+    /**
+     * Sets the subject ID assigned to the faculty member.
+     * 
+     * @param subjectId the subject ID to set
+     */
+    public void setSubjectId(long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    /**
+     * Returns the subject name assigned to the faculty member.
+     * 
+     * @return subjectName
+     */
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    /**
+     * Sets the subject name assigned to the faculty member.
+     * 
+     * @param subjectName the subject name to set
+     */
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    /**
+     * Returns the key for dropdown representation.
+     * Currently returns null and should be implemented.
+     * 
+     * @return key as String (currently null)
+     */
+    public String getKey() {
+        return null;
+    }
+
+    /**
+     * Returns the value for dropdown representation.
+     * Currently returns null and should be implemented.
+     * 
+     * @return value as String (currently null)
+     */
+    public String getValue() {
+        return null;
+    }
 }

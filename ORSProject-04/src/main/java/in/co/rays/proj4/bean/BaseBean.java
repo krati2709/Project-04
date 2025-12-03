@@ -2,51 +2,119 @@ package in.co.rays.proj4.bean;
 
 import java.sql.Timestamp;
 
-public abstract class BaseBean implements DropdownListBean{
+/**
+ * Abstract base class for all beans in the application.
+ * Provides common fields like id, createdBy, modifiedBy,
+ * createdDatetime, and modifiedDatetime.
+ * Implements the DropdownListBean interface.
+ * 
+ * @author Krati
+ * @version 1.0
+ */
+public abstract class BaseBean implements DropdownListBean {
 
-	protected long id;
-	protected String createdBy;
-	protected String modifiedBy;
-	protected Timestamp createdDatetime;
-	protected Timestamp modifiedDatetime;
+    /** Unique identifier for the bean */
+    protected long id;
 
-	public long getId() {
-		return id;
-	}
+    /** User who created this bean */
+    protected String createdBy;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /** User who last modified this bean */
+    protected String modifiedBy;
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
+    /** Timestamp when the bean was created */
+    protected Timestamp createdDatetime;
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+    /** Timestamp when the bean was last modified */
+    protected Timestamp modifiedDatetime;
 
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
+    /**
+     * Returns the unique identifier of the bean.
+     * 
+     * @return id of the bean
+     */
+    public long getId() {
+        return id;
+    }
 
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+    /**
+     * Sets the unique identifier of the bean.
+     * 
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public Timestamp getCreatedDatetime() {
-		return createdDatetime;
-	}
+    /**
+     * Returns the name of the user who created this bean.
+     * 
+     * @return createdBy
+     */
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
-	public void setCreatedDatetime(Timestamp createdDatetime) {
-		this.createdDatetime = createdDatetime;
-	}
+    /**
+     * Sets the name of the user who created this bean.
+     * 
+     * @param createdBy the creator's name
+     */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
-	public Timestamp getModifiedDatetime() {
-		return modifiedDatetime;
-	}
+    /**
+     * Returns the name of the user who last modified this bean.
+     * 
+     * @return modifiedBy
+     */
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
 
-	public void setModifiedDatetime(Timestamp modifiedDatetime) {
-		this.modifiedDatetime = modifiedDatetime;
-	}
+    /**
+     * Sets the name of the user who last modified this bean.
+     * 
+     * @param modifiedBy the modifier's name
+     */
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    /**
+     * Returns the timestamp when this bean was created.
+     * 
+     * @return createdDatetime
+     */
+    public Timestamp getCreatedDatetime() {
+        return createdDatetime;
+    }
+
+    /**
+     * Sets the timestamp when this bean was created.
+     * 
+     * @param createdDatetime the creation timestamp
+     */
+    public void setCreatedDatetime(Timestamp createdDatetime) {
+        this.createdDatetime = createdDatetime;
+    }
+
+    /**
+     * Returns the timestamp when this bean was last modified.
+     * 
+     * @return modifiedDatetime
+     */
+    public Timestamp getModifiedDatetime() {
+        return modifiedDatetime;
+    }
+
+    /**
+     * Sets the timestamp when this bean was last modified.
+     * 
+     * @param modifiedDatetime the modification timestamp
+     */
+    public void setModifiedDatetime(Timestamp modifiedDatetime) {
+        this.modifiedDatetime = modifiedDatetime;
+    }
 }

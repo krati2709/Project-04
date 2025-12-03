@@ -1,72 +1,162 @@
 package in.co.rays.proj4.bean;
 
+/**
+ * MarksheetBean represents a student's marksheet in the system.
+ * It extends BaseBean and contains details such as roll number,
+ * student ID, name, and marks in physics, chemistry, and maths.
+ * Also provides key-value representation for dropdowns.
+ * 
+ * Note: getKey() and getValue() methods are currently returning null
+ * and should be implemented as needed.
+ * 
+ * @author Krati
+ * @version 1.0
+ */
 public class MarksheetBean extends BaseBean {
 
-	private String rollNo;
-	private long studentId;
-	private String name;
-	private Integer physics;
-	private Integer chemistry;
-	private Integer maths;
+    /** Roll number of the student */
+    private String rollNo;
 
-	public String getRollNo() {
-		return rollNo;
-	}
+    /** ID of the student */
+    private long studentId;
 
-	public void setRollNo(String rollNo) {
-		this.rollNo = rollNo;
-	}
+    /** Name of the student */
+    private String name;
 
-	public long getStudentId() {
-		return studentId;
-	}
+    /** Marks obtained in Physics */
+    private Integer physics;
 
-	public void setStudentId(long studentId) {
-		this.studentId = studentId;
-	}
+    /** Marks obtained in Chemistry */
+    private Integer chemistry;
 
-	public String getName() {
-		return name;
-	}
+    /** Marks obtained in Maths */
+    private Integer maths;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Returns the roll number of the student.
+     * 
+     * @return rollNo
+     */
+    public String getRollNo() {
+        return rollNo;
+    }
 
-	public Integer getPhysics() {
-		return physics;
-	}
+    /**
+     * Sets the roll number of the student.
+     * 
+     * @param rollNo the roll number to set
+     */
+    public void setRollNo(String rollNo) {
+        this.rollNo = rollNo;
+    }
 
-	public void setPhysics(int physics) {
-		this.physics = physics;
-	}
+    /**
+     * Returns the student ID.
+     * 
+     * @return studentId
+     */
+    public long getStudentId() {
+        return studentId;
+    }
 
-	public Integer getChemistry() {
-		return chemistry;
-	}
+    /**
+     * Sets the student ID.
+     * 
+     * @param studentId the student ID to set
+     */
+    public void setStudentId(long studentId) {
+        this.studentId = studentId;
+    }
 
-	public void setChemistry(int chemistry) {
-		this.chemistry = chemistry;
-	}
+    /**
+     * Returns the name of the student.
+     * 
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
 
-	public Integer getMaths() {
-		return maths;
-	}
+    /**
+     * Sets the name of the student.
+     * 
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setMaths(int maths) {
-		this.maths = maths;
-	}
+    /**
+     * Returns the marks obtained in Physics.
+     * 
+     * @return physics marks
+     */
+    public Integer getPhysics() {
+        return physics;
+    }
 
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Sets the marks obtained in Physics.
+     * 
+     * @param physics the marks to set
+     */
+    public void setPhysics(int physics) {
+        this.physics = physics;
+    }
 
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Returns the marks obtained in Chemistry.
+     * 
+     * @return chemistry marks
+     */
+    public Integer getChemistry() {
+        return chemistry;
+    }
 
+    /**
+     * Sets the marks obtained in Chemistry.
+     * 
+     * @param chemistry the marks to set
+     */
+    public void setChemistry(int chemistry) {
+        this.chemistry = chemistry;
+    }
 
+    /**
+     * Returns the marks obtained in Maths.
+     * 
+     * @return maths marks
+     */
+    public Integer getMaths() {
+        return maths;
+    }
 
+    /**
+     * Sets the marks obtained in Maths.
+     * 
+     * @param maths the marks to set
+     */
+    public void setMaths(int maths) {
+        this.maths = maths;
+    }
+
+    /**
+     * Returns the key for dropdown representation.
+     * Currently returns null and should be implemented.
+     * 
+     * @return key as String (currently null)
+     */
+    public String getKey() {
+        return null;
+    }
+
+    /**
+     * Returns the value for dropdown representation.
+     * Currently returns null and should be implemented.
+     * 
+     * @return value as String (currently null)
+     */
+    public String getValue() {
+        return null;
+    }
 }

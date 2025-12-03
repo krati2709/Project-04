@@ -15,55 +15,85 @@ import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
+/**
+ * <p><b>MarksheetMeritListCtl</b> is responsible for displaying
+ * the Merit List of students based on their marks.</p>
+ *
+ * <p>This controller performs:</p>
+ * <ul>
+ *   <li>Fetching merit list using MarksheetModel</li>
+ *   <li>Displaying results with pagination</li>
+ *   <li>Handling BACK navigation</li>
+ * </ul>
+ *
+ * <p>Accessible at: <b>/ctl/MarksheetMeritListCtl</b></p>
+ * 
+ * @author Krati
+ */
 @WebServlet(name = "MarksheetMeritListCtl", urlPatterns = { "/ctl/MarksheetMeritListCtl" })
 public class MarksheetMeritListCtl extends BaseCtl {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    /**
+     * Handles GET request to load and display the Merit List.
+     *
+     * @param request  incoming HTTP request
+     * @param response HTTP response to be sent
+     * @throws ServletException if any servlet-related issue occurs
+     * @throws IOException      if an input/output error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		int pageNo = 1;
-		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
+        int pageNo = 1;
+        int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
+        MarksheetModel model = new MarksheetModel();
 
-		MarksheetModel model = new MarksheetModel();
+        try {
+            List<MarksheetBean> list = model.getMeritList(pageNo, pageSize);
 
-		List<MarksheetBean> list;
-		try {
-			list = model.getMeritList(pageNo, pageSize);
+            if (list == null || list.isEmpty()) {
+                ServletUtility.setErrorMessage("No record found", request);
+            }
 
-			if (list == null || list.isEmpty()) {
-				ServletUtility.setErrorMessage("No record found", request);
-			}
+            ServletUtility.setList(list, request);
+            ServletUtility.setPageNo(pageNo, request);
+            ServletUtility.setPageSize(pageSize, request);
 
-			ServletUtility.setList(list, request);
-			ServletUtility.setPageNo(pageNo, request);
-			ServletUtility.setPageSize(pageSize, request);
+            ServletUtility.forward(getView(), request, response);
 
-			ServletUtility.forward(getView(), request, response);
-		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			ServletUtility.handleException(e, request, response);
-			return;
-		}
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+            ServletUtility.handleException(e, request, response);
+        }
+    }
 
-	}
+    /**
+     * Handles POST request for BACK operation.
+     *
+     * @param request  incoming HTTP request
+     * @param response HTTP response to redirect or forward
+     * @throws ServletException if a servlet error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+        String op = DataUtility.getString(request.getParameter("operation"));
 
-		String op = DataUtility.getString(request.getParameter("operation"));
+        if (OP_BACK.equalsIgnoreCase(op)) {
+            ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
+        }
+    }
 
-		if (OP_BACK.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
-			return;
-		}
-	}
-
-	@Override
-	protected String getView() {
-		return ORSView.MARKSHEET_MERIT_LIST_VIEW;
-	}
-
+    /**
+     * Returns the JSP view used to display the Merit List.
+     *
+     * @return path to MARKSHEET_MERIT_LIST_VIEW JSP
+     */
+    @Override
+    protected String getView() {
+        return ORSView.MARKSHEET_MERIT_LIST_VIEW;
+    }
 }

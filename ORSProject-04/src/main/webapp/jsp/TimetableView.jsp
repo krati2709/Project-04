@@ -1,9 +1,9 @@
+<%@page import="in.co.rays.proj4.bean.TimetableBean"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Collections"%>
 <%@page import="in.co.rays.proj4.controller.UserCtl"%>
-<%@page import="in.co.rays.proj4.bean.TimetableBean"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="in.co.rays.proj4.util.HTMLUtility"%>

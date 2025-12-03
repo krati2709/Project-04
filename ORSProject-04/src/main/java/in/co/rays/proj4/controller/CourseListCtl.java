@@ -18,9 +18,31 @@ import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
+/**
+ * CourseListCtl handles listing, searching, pagination, and deletion of Course
+ * records.
+ * 
+ * <p>
+ * This controller provides:
+ * </p>
+ * <ul>
+ * <li>Preloading course list</li>
+ * <li>Searching course records</li>
+ * <li>Pagination support</li>
+ * <li>Bulk deletion</li>
+ * <li>Page navigation: Next, Previous, Reset, Back</li>
+ * </ul>
+ * 
+ * @author Krati
+ */
 @WebServlet(name = "CourseListCtl", urlPatterns = { "/ctl/CourseListCtl" })
 public class CourseListCtl extends BaseCtl {
 
+	/**
+	 * Preloads course list for dropdowns or filters.
+	 *
+	 * @param request incoming HTTP request
+	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
 
@@ -34,6 +56,12 @@ public class CourseListCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * Populates a CourseBean using request parameters.
+	 *
+	 * @param request HTTP request containing form data
+	 * @return populated CourseBean
+	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		CourseBean bean = new CourseBean();
@@ -45,6 +73,13 @@ public class CourseListCtl extends BaseCtl {
 		return bean;
 	}
 
+	/**
+	 * Handles displaying the course list page. Performs initial search and
+	 * pagination.
+	 *
+	 * @param request  HTTP request
+	 * @param response HTTP response
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -77,9 +112,17 @@ public class CourseListCtl extends BaseCtl {
 			return;
 		}
 	}
-	
+
+	/**
+	 * Handles search, pagination, delete, reset and navigation actions.
+	 *
+	 * @param request  HTTP request
+	 * @param response HTTP response
+	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		List list = null;
 		List next = null;
 
@@ -110,7 +153,7 @@ public class CourseListCtl extends BaseCtl {
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_CTL, request, response);
 				return;
-				
+
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
@@ -118,16 +161,16 @@ public class CourseListCtl extends BaseCtl {
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean);
-						ServletUtility.setSuccessMessage("User deleted successfully", request);
 					}
+					ServletUtility.setSuccessMessage("Course deleted successfully", request);
 				} else {
 					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
-				
+
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
 				return;
-				
+
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
 				return;
@@ -137,7 +180,7 @@ public class CourseListCtl extends BaseCtl {
 			next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.size() == 0) {
-				ServletUtility.setErrorMessage("No record found ", request);
+				ServletUtility.setErrorMessage("No record found", request);
 			}
 
 			ServletUtility.setList(list, request);
@@ -154,9 +197,13 @@ public class CourseListCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * Returns the view page for Course List.
+	 *
+	 * @return Course List JSP view path
+	 */
 	@Override
 	protected String getView() {
-		// TODO Auto-generated method stub
 		return ORSView.COURSE_LIST_VIEW;
 	}
 

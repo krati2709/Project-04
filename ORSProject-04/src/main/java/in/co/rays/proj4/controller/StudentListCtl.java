@@ -9,143 +9,184 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
-import in.co.rays.proj4.bean.MarksheetBean;
 import in.co.rays.proj4.bean.StudentBean;
 import in.co.rays.proj4.exception.ApplicationException;
-import in.co.rays.proj4.model.MarksheetModel;
 import in.co.rays.proj4.model.StudentModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
+/**
+ * StudentListCtl is a controller class to handle listing, searching, and
+ * deleting operations of Student.
+ * <p>
+ * It supports pagination and forwards the student list to StudentListView JSP.
+ * </p>
+ * URL pattern for this controller is "/ctl/StudentListCtl".
+ * 
+ * It interacts with StudentModel for database operations.
+ * 
+ * @author krati
+ * @version 1.0
+ */
 @WebServlet(name = "StudentListCtl", urlPatterns = { "/ctl/StudentListCtl" })
-public class StudentListCtl extends BaseCtl{
+public class StudentListCtl extends BaseCtl {
 
-	
-	@Override
-	protected BaseBean populateBean(HttpServletRequest request) {
+    /**
+     * Populates StudentBean from request parameters for search and filtering.
+     * 
+     * @param request HttpServletRequest object
+     * @return BaseBean populated with search/filter criteria
+     */
+    @Override
+    protected BaseBean populateBean(HttpServletRequest request) {
+        StudentBean bean = new StudentBean();
 
-		StudentBean bean = new StudentBean();
+        bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
+        bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
+        bean.setEmail(DataUtility.getString(request.getParameter("email")));
 
-		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
-		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
-		bean.setEmail(DataUtility.getString(request.getParameter("email")));
+        return bean;
+    }
 
-		return bean;
-	}
+    /**
+     * Handles HTTP GET request to display the student list.
+     * <p>
+     * Supports pagination and sets list, page number, page size, and next list
+     * size attributes in the request.
+     * </p>
+     * 
+     * @param request  HttpServletRequest object
+     * @param response HttpServletResponse object
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+        int pageNo = 1;
+        int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		int pageNo = 1;
-		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
+        StudentBean bean = (StudentBean) populateBean(request);
+        StudentModel model = new StudentModel();
 
-		StudentBean bean = (StudentBean) populateBean(request);
-		StudentModel model = new StudentModel();
+        try {
+            List<StudentBean> list = model.search(bean, pageNo, pageSize);
+            List<StudentBean> next = model.search(bean, pageNo + 1, pageSize);
 
-		try {
-			List<StudentBean> list = model.search(bean, pageNo, pageSize);
-			List<StudentBean> next = model.search(bean, pageNo + 1, pageSize);
+            if (list == null || list.isEmpty()) {
+                ServletUtility.setErrorMessage("No record found", request);
+            }
 
-			if (list == null || list.isEmpty()) {
-				ServletUtility.setErrorMessage("No record found", request);
-			}
+            ServletUtility.setList(list, request);
+            ServletUtility.setPageNo(pageNo, request);
+            ServletUtility.setPageSize(pageSize, request);
+            ServletUtility.setBean(bean, request);
+            request.setAttribute("nextListSize", next.size());
 
-			ServletUtility.setList(list, request);
-			ServletUtility.setPageNo(pageNo, request);
-			ServletUtility.setPageSize(pageSize, request);
-			ServletUtility.setBean(bean, request);
-			request.setAttribute("nextListSize", next.size());
+            ServletUtility.forward(getView(), request, response);
 
-			ServletUtility.forward(getView(), request, response);
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+            ServletUtility.handleException(e, request, response);
+            return;
+        }
+    }
 
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-			ServletUtility.handleException(e, request, response);
-			return;
-		}
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List list = null;
-		List next = null;
+    /**
+     * Handles HTTP POST request for search, pagination, delete, reset, and back
+     * operations.
+     * 
+     * @param request  HttpServletRequest object
+     * @param response HttpServletResponse object
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
-		int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
+        List list = null;
+        List next = null;
 
-		pageNo = (pageNo == 0) ? 1 : pageNo;
-		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
+        int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
+        int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
 
-		StudentBean bean = (StudentBean) populateBean(request);
-		StudentModel model = new StudentModel();
+        pageNo = (pageNo == 0) ? 1 : pageNo;
+        pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		String op = DataUtility.getString(request.getParameter("operation"));
-		String[] ids = request.getParameterValues("ids");
+        StudentBean bean = (StudentBean) populateBean(request);
+        StudentModel model = new StudentModel();
 
-		try {
+        String op = DataUtility.getString(request.getParameter("operation"));
+        String[] ids = request.getParameterValues("ids");
 
-			if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
+        try {
 
-				if (OP_SEARCH.equalsIgnoreCase(op)) {
-					pageNo = 1;
-				} else if (OP_NEXT.equalsIgnoreCase(op)) {
-					pageNo++;
-				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
-					pageNo--;
-				}
+            if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
 
-			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.USER_CTL, request, response);
-				return;
-				
-			} else if (OP_DELETE.equalsIgnoreCase(op)) {
-				pageNo = 1;
-				if (ids != null && ids.length > 0) {
-					StudentBean deletebean = new StudentBean();
-					for (String id : ids) {
-						deletebean.setId(DataUtility.getInt(id));
-						model.delete(deletebean);
-						ServletUtility.setSuccessMessage("User deleted successfully", request);
-					}
-				} else {
-					ServletUtility.setErrorMessage("Select at least one record", request);
-				}
-				
-			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
-				return;
-				
-			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
-				return;
-			}
+                if (OP_SEARCH.equalsIgnoreCase(op)) {
+                    pageNo = 1;
+                } else if (OP_NEXT.equalsIgnoreCase(op)) {
+                    pageNo++;
+                } else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
+                    pageNo--;
+                }
 
-			list = model.search(bean, pageNo, pageSize);
-			next = model.search(bean, pageNo + 1, pageSize);
+            } else if (OP_NEW.equalsIgnoreCase(op)) {
+                ServletUtility.redirect(ORSView.USER_CTL, request, response);
+                return;
 
-			if (list == null || list.size() == 0) {
-				ServletUtility.setErrorMessage("No record found ", request);
-			}
+            } else if (OP_DELETE.equalsIgnoreCase(op)) {
+                pageNo = 1;
+                if (ids != null && ids.length > 0) {
+                    StudentBean deletebean = new StudentBean();
+                    for (String id : ids) {
+                        deletebean.setId(DataUtility.getInt(id));
+                        model.delete(deletebean);
+                        ServletUtility.setSuccessMessage("User deleted successfully", request);
+                    }
+                } else {
+                    ServletUtility.setErrorMessage("Select at least one record", request);
+                }
 
-			ServletUtility.setList(list, request);
-			ServletUtility.setPageNo(pageNo, request);
-			ServletUtility.setPageSize(pageSize, request);
-			ServletUtility.setBean(bean, request);
-			request.setAttribute("nextListSize", next.size());
+            } else if (OP_RESET.equalsIgnoreCase(op)) {
+                ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
+                return;
 
-			ServletUtility.forward(getView(), request, response);
+            } else if (OP_BACK.equalsIgnoreCase(op)) {
+                ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
+                return;
+            }
 
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-			return;
-		}
-	}
+            list = model.search(bean, pageNo, pageSize);
+            next = model.search(bean, pageNo + 1, pageSize);
 
-	@Override
-	protected String getView() {
-		// TODO Auto-generated method stub
-		return ORSView.STUDENT_LIST_VIEW;
-	}
+            if (list == null || list.size() == 0) {
+                ServletUtility.setErrorMessage("No record found ", request);
+            }
 
+            ServletUtility.setList(list, request);
+            ServletUtility.setPageNo(pageNo, request);
+            ServletUtility.setPageSize(pageSize, request);
+            ServletUtility.setBean(bean, request);
+            request.setAttribute("nextListSize", next.size());
+
+            ServletUtility.forward(getView(), request, response);
+
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    /**
+     * Returns the view page for Student list module.
+     * 
+     * @return JSP view path for Student list
+     */
+    @Override
+    protected String getView() {
+        return ORSView.STUDENT_LIST_VIEW;
+    }
 }

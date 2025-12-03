@@ -1,102 +1,263 @@
 package in.co.rays.proj4.controller;
 
+/**
+ * ORSView interface contains constants for JSP view paths and corresponding
+ * controller URLs for the ORSProject-04 application.
+ * <p>
+ * This interface centralizes all view and controller references to avoid
+ * hardcoding in the codebase, making maintenance and navigation easier.
+ * </p>
+ * 
+ * @author krati
+ * @version 1.0
+ */
 public interface ORSView {
 
-	public String APP_CONTEXT = "/ORSProject-04";
+    /** Application context path */
+    public String APP_CONTEXT = "/ORSProject-04";
 
-	public String PAGE_FOLDER = "/jsp";
+    /** Base folder for JSP pages */
+    public String PAGE_FOLDER = "/jsp";
 
-	public String WELCOME_VIEW = PAGE_FOLDER + "/Welcome.jsp"; // /jsp/welcome.jsp
-	public String WELCOME_CTL = APP_CONTEXT + "/WelcomeCtl";
+    // -----------------------------------------------------------
+    // Welcome Module
+    // -----------------------------------------------------------
 
-	public String USER_REGISTRATION_VIEW = PAGE_FOLDER + "/UserRegistrationView.jsp";
-	public String USER_REGISTRATION_CTL = APP_CONTEXT + "/UserRegistrationCtl";
+    /** Welcome page JSP */
+    public String WELCOME_VIEW = PAGE_FOLDER + "/Welcome.jsp";
 
-	public String FORGET_PASSWORD_VIEW = PAGE_FOLDER + "/ForgetPasswordView.jsp";
-	public String FORGET_PASSWORD_CTL = APP_CONTEXT + "/ForgetPasswordCtl";
+    /** Welcome controller URL */
+    public String WELCOME_CTL = APP_CONTEXT + "/WelcomeCtl";
 
-	public String LOGIN_VIEW = PAGE_FOLDER + "/LoginView.jsp";
-	public String LOGIN_CTL = APP_CONTEXT + "/LoginCtl";
+    // -----------------------------------------------------------
+    // User Module
+    // -----------------------------------------------------------
 
-	public String MY_PROFILE_VIEW = PAGE_FOLDER + "/MyProfileView.jsp"; 
-	public String MY_PROFILE_CTL = APP_CONTEXT + "/ctl/MyProfileCtl";
+    /** User Registration JSP */
+    public String USER_REGISTRATION_VIEW = PAGE_FOLDER + "/UserRegistrationView.jsp";
 
-	public String CHANGE_PASSWORD_VIEW = PAGE_FOLDER + "/ChangePasswordView.jsp";
-	public String CHANGE_PASSWORD_CTL = APP_CONTEXT + "/ctl/ChangePasswordCtl";
+    /** User Registration Controller URL */
+    public String USER_REGISTRATION_CTL = APP_CONTEXT + "/UserRegistrationCtl";
 
-	public String GET_MARKSHEET_VIEW = PAGE_FOLDER + "/GetMarksheetView.jsp";
-	public String GET_MARKSHEET_CTL = APP_CONTEXT + "/ctl/GetMarksheetCtl";
+    /** Forget Password JSP */
+    public String FORGET_PASSWORD_VIEW = PAGE_FOLDER + "/ForgetPasswordView.jsp";
 
-	public String MARKSHEET_MERIT_LIST_VIEW = PAGE_FOLDER + "/MarksheetMeritListView.jsp";
-	public String MARKSHEET_MERIT_LIST_CTL = APP_CONTEXT + "/ctl/MarksheetMeritListCtl";
+    /** Forget Password Controller URL */
+    public String FORGET_PASSWORD_CTL = APP_CONTEXT + "/ForgetPasswordCtl";
 
-	public String USER_VIEW = PAGE_FOLDER + "/UserView.jsp";
-	public String USER_CTL = APP_CONTEXT + "/ctl/UserCtl";
+    /** Login JSP */
+    public String LOGIN_VIEW = PAGE_FOLDER + "/LoginView.jsp";
 
-	public String USER_LIST_VIEW = PAGE_FOLDER + "/UserListView.jsp";
-	public String USER_LIST_CTL = APP_CONTEXT + "/ctl/UserListCtl";
+    /** Login Controller URL */
+    public String LOGIN_CTL = APP_CONTEXT + "/LoginCtl";
 
-	public String ROLE_VIEW = PAGE_FOLDER + "/RoleView.jsp";
-	public String ROLE_CTL = APP_CONTEXT + "/ctl/RoleCtl";
+    /** My Profile JSP */
+    public String MY_PROFILE_VIEW = PAGE_FOLDER + "/MyProfileView.jsp"; 
 
-	public String ROLE_LIST_VIEW = PAGE_FOLDER + "/RoleListView.jsp";
-	public String ROLE_LIST_CTL = APP_CONTEXT + "/ctl/RoleListCtl";
+    /** My Profile Controller URL */
+    public String MY_PROFILE_CTL = APP_CONTEXT + "/ctl/MyProfileCtl";
 
-	public String COLLEGE_VIEW = PAGE_FOLDER + "/CollegeView.jsp";
-	public String COLLEGE_CTL = APP_CONTEXT + "/ctl/CollegeCtl";
+    /** Change Password JSP */
+    public String CHANGE_PASSWORD_VIEW = PAGE_FOLDER + "/ChangePasswordView.jsp";
 
-	public String COLLEGE_LIST_VIEW = PAGE_FOLDER + "/CollegeListView.jsp";
-	public String COLLEGE_LIST_CTL = APP_CONTEXT + "/ctl/CollegeListCtl";
+    /** Change Password Controller URL */
+    public String CHANGE_PASSWORD_CTL = APP_CONTEXT + "/ctl/ChangePasswordCtl";
 
-	public String STUDENT_VIEW = PAGE_FOLDER + "/StudentView.jsp";
-	public String STUDENT_CTL = APP_CONTEXT + "/ctl/StudentCtl";
+    // -----------------------------------------------------------
+    // Marksheet Module
+    // -----------------------------------------------------------
 
-	public String STUDENT_LIST_VIEW = PAGE_FOLDER + "/StudentListView.jsp";
-	public String STUDENT_LIST_CTL = APP_CONTEXT + "/ctl/StudentListCtl";
+    /** Get Marksheet JSP */
+    public String GET_MARKSHEET_VIEW = PAGE_FOLDER + "/GetMarksheetView.jsp";
 
-	public String MARKSHEET_VIEW = PAGE_FOLDER + "/MarksheetView.jsp";
-	public String MARKSHEET_CTL = APP_CONTEXT + "/ctl/MarksheetCtl";
+    /** Get Marksheet Controller URL */
+    public String GET_MARKSHEET_CTL = APP_CONTEXT + "/ctl/GetMarksheetCtl";
 
-	public String MARKSHEET_LIST_VIEW = PAGE_FOLDER + "/MarksheetListView.jsp";
-	public String MARKSHEET_LIST_CTL = APP_CONTEXT + "/ctl/MarksheetListCtl";
+    /** Marksheet Merit List JSP */
+    public String MARKSHEET_MERIT_LIST_VIEW = PAGE_FOLDER + "/MarksheetMeritListView.jsp";
 
-	public String COURSE_VIEW = PAGE_FOLDER + "/CourseView.jsp";
-	public String COURSE_CTL = APP_CONTEXT + "/ctl/CourseCtl";
+    /** Marksheet Merit List Controller URL */
+    public String MARKSHEET_MERIT_LIST_CTL = APP_CONTEXT + "/ctl/MarksheetMeritListCtl";
 
-	public String COURSE_LIST_VIEW = PAGE_FOLDER + "/CourseListView.jsp";
-	public String COURSE_LIST_CTL = APP_CONTEXT + "/ctl/CourseListCtl";
+    /** Marksheet View JSP */
+    public String MARKSHEET_VIEW = PAGE_FOLDER + "/MarksheetView.jsp";
 
-	public String SUBJECT_VIEW = PAGE_FOLDER + "/SubjectView.jsp";
-	public String SUBJECT_CTL = APP_CONTEXT + "/ctl/SubjectCtl";
+    /** Marksheet Controller URL */
+    public String MARKSHEET_CTL = APP_CONTEXT + "/ctl/MarksheetCtl";
 
-	public String SUBJECT_LIST_VIEW = PAGE_FOLDER + "/SubjectListView.jsp";
-	public String SUBJECT_LIST_CTL = APP_CONTEXT + "/ctl/SubjectListCtl";
+    /** Marksheet List JSP */
+    public String MARKSHEET_LIST_VIEW = PAGE_FOLDER + "/MarksheetListView.jsp";
 
-	public String TIMETABLE_VIEW = PAGE_FOLDER + "/TimetableView.jsp";
-	public String TIMETABLE_CTL = APP_CONTEXT + "/ctl/TimetableCtl";
+    /** Marksheet List Controller URL */
+    public String MARKSHEET_LIST_CTL = APP_CONTEXT + "/ctl/MarksheetListCtl";
 
-	public String TIMETABLE_LIST_VIEW = PAGE_FOLDER + "/TimetableListView.jsp";
-	public String TIMETABLE_LIST_CTL = APP_CONTEXT + "/ctl/TimetableListCtl";
+    // -----------------------------------------------------------
+    // User Management Module
+    // -----------------------------------------------------------
 
-	public String FACULTY_VIEW = PAGE_FOLDER + "/FacultyView.jsp";
-	public String FACULTY_CTL = APP_CONTEXT + "/ctl/FacultyCtl";
+    /** User View JSP */
+    public String USER_VIEW = PAGE_FOLDER + "/UserView.jsp";
 
-	public String FACULTY_LIST_VIEW = PAGE_FOLDER + "/FacultyListView.jsp";
-	public String FACULTY_LIST_CTL = APP_CONTEXT + "/ctl/FacultyListCtl";
+    /** User Controller URL */
+    public String USER_CTL = APP_CONTEXT + "/ctl/UserCtl";
 
-	public String ERROR_VIEW = PAGE_FOLDER + "/ErrorView.jsp";
-	public String ERROR_CTL = APP_CONTEXT + "/ctl/ErrorCtl";
-	
-	
-	
-	
-	
-	
-	public String DEPARTMENT_VIEW = PAGE_FOLDER + "/DepartmentView.jsp";
-	public String DEPARTMENT_CTL = APP_CONTEXT + "/ctl/DepartmentCtl";
-	
-	public String DEPARTMENT_LIST_VIEW = PAGE_FOLDER + "/DepartmentListView.jsp";
-	public String DEPARTMENT_LIST_CTL = APP_CONTEXT + "/ctl/DepartmentListCtl";
+    /** User List JSP */
+    public String USER_LIST_VIEW = PAGE_FOLDER + "/UserListView.jsp";
 
+    /** User List Controller URL */
+    public String USER_LIST_CTL = APP_CONTEXT + "/ctl/UserListCtl";
 
+    // -----------------------------------------------------------
+    // Role Module
+    // -----------------------------------------------------------
+
+    /** Role View JSP */
+    public String ROLE_VIEW = PAGE_FOLDER + "/RoleView.jsp";
+
+    /** Role Controller URL */
+    public String ROLE_CTL = APP_CONTEXT + "/ctl/RoleCtl";
+
+    /** Role List JSP */
+    public String ROLE_LIST_VIEW = PAGE_FOLDER + "/RoleListView.jsp";
+
+    /** Role List Controller URL */
+    public String ROLE_LIST_CTL = APP_CONTEXT + "/ctl/RoleListCtl";
+
+    // -----------------------------------------------------------
+    // College Module
+    // -----------------------------------------------------------
+
+    /** College View JSP */
+    public String COLLEGE_VIEW = PAGE_FOLDER + "/CollegeView.jsp";
+
+    /** College Controller URL */
+    public String COLLEGE_CTL = APP_CONTEXT + "/ctl/CollegeCtl";
+
+    /** College List JSP */
+    public String COLLEGE_LIST_VIEW = PAGE_FOLDER + "/CollegeListView.jsp";
+
+    /** College List Controller URL */
+    public String COLLEGE_LIST_CTL = APP_CONTEXT + "/ctl/CollegeListCtl";
+
+    // -----------------------------------------------------------
+    // Student Module
+    // -----------------------------------------------------------
+
+    /** Student View JSP */
+    public String STUDENT_VIEW = PAGE_FOLDER + "/StudentView.jsp";
+
+    /** Student Controller URL */
+    public String STUDENT_CTL = APP_CONTEXT + "/ctl/StudentCtl";
+
+    /** Student List JSP */
+    public String STUDENT_LIST_VIEW = PAGE_FOLDER + "/StudentListView.jsp";
+
+    /** Student List Controller URL */
+    public String STUDENT_LIST_CTL = APP_CONTEXT + "/ctl/StudentListCtl";
+
+    // -----------------------------------------------------------
+    // Course Module
+    // -----------------------------------------------------------
+
+    /** Course View JSP */
+    public String COURSE_VIEW = PAGE_FOLDER + "/CourseView.jsp";
+
+    /** Course Controller URL */
+    public String COURSE_CTL = APP_CONTEXT + "/ctl/CourseCtl";
+
+    /** Course List JSP */
+    public String COURSE_LIST_VIEW = PAGE_FOLDER + "/CourseListView.jsp";
+
+    /** Course List Controller URL */
+    public String COURSE_LIST_CTL = APP_CONTEXT + "/ctl/CourseListCtl";
+
+    // -----------------------------------------------------------
+    // Subject Module
+    // -----------------------------------------------------------
+
+    /** Subject View JSP */
+    public String SUBJECT_VIEW = PAGE_FOLDER + "/SubjectView.jsp";
+
+    /** Subject Controller URL */
+    public String SUBJECT_CTL = APP_CONTEXT + "/ctl/SubjectCtl";
+
+    /** Subject List JSP */
+    public String SUBJECT_LIST_VIEW = PAGE_FOLDER + "/SubjectListView.jsp";
+
+    /** Subject List Controller URL */
+    public String SUBJECT_LIST_CTL = APP_CONTEXT + "/ctl/SubjectListCtl";
+
+    // -----------------------------------------------------------
+    // Timetable Module
+    // -----------------------------------------------------------
+
+    /** Timetable View JSP */
+    public String TIMETABLE_VIEW = PAGE_FOLDER + "/TimetableView.jsp";
+
+    /** Timetable Controller URL */
+    public String TIMETABLE_CTL = APP_CONTEXT + "/ctl/TimetableCtl";
+
+    /** Timetable List JSP */
+    public String TIMETABLE_LIST_VIEW = PAGE_FOLDER + "/TimetableListView.jsp";
+
+    /** Timetable List Controller URL */
+    public String TIMETABLE_LIST_CTL = APP_CONTEXT + "/ctl/TimetableListCtl";
+
+    // -----------------------------------------------------------
+    // Faculty Module
+    // -----------------------------------------------------------
+
+    /** Faculty View JSP */
+    public String FACULTY_VIEW = PAGE_FOLDER + "/FacultyView.jsp";
+
+    /** Faculty Controller URL */
+    public String FACULTY_CTL = APP_CONTEXT + "/ctl/FacultyCtl";
+
+    /** Faculty List JSP */
+    public String FACULTY_LIST_VIEW = PAGE_FOLDER + "/FacultyListView.jsp";
+
+    /** Faculty List Controller URL */
+    public String FACULTY_LIST_CTL = APP_CONTEXT + "/ctl/FacultyListCtl";
+
+    // -----------------------------------------------------------
+    // Error Page
+    // -----------------------------------------------------------
+
+    /** Error JSP */
+    public String ERROR_VIEW = PAGE_FOLDER + "/ErrorView.jsp";
+
+    /** Error Controller URL */
+    public String ERROR_CTL = APP_CONTEXT + "/ctl/ErrorCtl";
+
+    // -----------------------------------------------------------
+    // Department Module
+    // -----------------------------------------------------------
+
+    /** Department View JSP */
+    public String DEPARTMENT_VIEW = PAGE_FOLDER + "/DepartmentView.jsp";
+
+    /** Department Controller URL */
+    public String DEPARTMENT_CTL = APP_CONTEXT + "/ctl/DepartmentCtl";
+
+    /** Department List JSP */
+    public String DEPARTMENT_LIST_VIEW = PAGE_FOLDER + "/DepartmentListView.jsp";
+
+    /** Department List Controller URL */
+    public String DEPARTMENT_LIST_CTL = APP_CONTEXT + "/ctl/DepartmentListCtl";
+
+    // -----------------------------------------------------------
+    // Hostel Module
+    // -----------------------------------------------------------
+
+    /** Hostel View JSP */
+    public String HOSTEL_VIEW = PAGE_FOLDER + "/HostelView.jsp";
+
+    /** Hostel Controller URL */
+    public String HOSTEL_CTL = APP_CONTEXT + "/ctl/HostelCtl";
+
+    /** Hostel List JSP */
+    public String HOSTEL_LIST_VIEW = PAGE_FOLDER + "/HostelListView.jsp";
+
+    /** Hostel List Controller URL */
+    public String HOSTEL_LIST_CTL = APP_CONTEXT + "/ctl/HostelListCtl";
 }

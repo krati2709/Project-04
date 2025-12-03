@@ -10,18 +10,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CollegeBean;
-import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.model.CollegeModel;
-import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
+/**
+ * CollegeListCtl Servlet handles the operations of displaying, searching,
+ * paginating and deleting College records. It works as the Controller in MVC
+ * architecture for the College List View.
+ * 
+ * @author Krati
+ * @version 1.0
+ */
 @WebServlet(name = "CollegeListCtl", urlPatterns = { "/ctl/CollegeListCtl" })
 public class CollegeListCtl extends BaseCtl {
 
-	
+	/**
+	 * Preloads the list of Colleges to populate dropdowns on the JSP page.
+	 *
+	 * @param request HttpServletRequest object
+	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
 		CollegeModel collegeModel = new CollegeModel();
@@ -34,6 +44,12 @@ public class CollegeListCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * Populates the CollegeBean object from request parameters.
+	 *
+	 * @param request HttpServletRequest object
+	 * @return populated CollegeBean
+	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
@@ -46,6 +62,12 @@ public class CollegeListCtl extends BaseCtl {
 		return bean;
 	}
 
+	/**
+	 * Handles HTTP GET requests. Displays the first page of college records.
+	 *
+	 * @param request HttpServletRequest object
+	 * @param response HttpServletResponse object
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -78,9 +100,17 @@ public class CollegeListCtl extends BaseCtl {
 			return;
 		}
 	}
-	
+
+	/**
+	 * Handles HTTP POST requests for operations such as Search, Next, Previous,
+	 * New, Delete, Reset and Back.
+	 *
+	 * @param request HttpServletRequest object
+	 * @param response HttpServletResponse object
+	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List list = null;
 		List next = null;
 
@@ -111,7 +141,7 @@ public class CollegeListCtl extends BaseCtl {
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_CTL, request, response);
 				return;
-				
+
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
@@ -124,11 +154,11 @@ public class CollegeListCtl extends BaseCtl {
 				} else {
 					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
-				
+
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
 				return;
-				
+
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
 				return;
@@ -154,9 +184,14 @@ public class CollegeListCtl extends BaseCtl {
 			return;
 		}
 	}
+
+	/**
+	 * Returns the view for College List.
+	 *
+	 * @return College List JSP page
+	 */
 	@Override
 	protected String getView() {
-		// TODO Auto-generated method stub
 		return ORSView.COLLEGE_LIST_VIEW;
 	}
 
