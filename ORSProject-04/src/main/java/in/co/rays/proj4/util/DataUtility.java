@@ -13,7 +13,7 @@ import java.util.Date;
 public class DataUtility {
 
     /** Standard application date format */
-    public static final String APP_DATE_FORMAT = "yyyy-MM-dd";
+    public static final String APP_DATE_FORMAT = "dd-MM-yyyy";
 
     /** Standard application timestamp format */
     public static final String APP_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";

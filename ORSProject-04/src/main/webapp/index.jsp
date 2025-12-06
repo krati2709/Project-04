@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>Online Result System</title>
-<link rel="stylesheet" type="text/css" href="Style.css">
 
 <link rel="icon" type="image/png"
 	href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16x16" />

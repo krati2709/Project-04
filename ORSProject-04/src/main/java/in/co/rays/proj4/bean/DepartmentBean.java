@@ -53,25 +53,20 @@ public class DepartmentBean extends BaseBean {
         this.description = description;
     }
 
+	public String getKey() {
+		return id + "";
+	}
+
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+
     /**
      * Returns the key for dropdown representation.
      * Here, it returns the id as a String.
      * 
      * @return key as String
      */
-    @Override
-    public String getKey() {
-        return id + "";
-    }
 
-    /**
-     * Returns the value for dropdown representation.
-     * Here, it returns the department name.
-     * 
-     * @return value as String
-     */
-    @Override
-    public String getValue() {
-        return name;
-    }
 }

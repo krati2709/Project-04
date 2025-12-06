@@ -239,7 +239,7 @@ public class SubjectModel {
             sql.append(" limit " + pageNo + ", " + pageSize);
         }
 
-        ArrayList<SubjectBean> list = new ArrayList<>();
+        ArrayList<SubjectBean> list = new ArrayList();
         Connection conn = null;
         try {
             conn = JDBCDataSource.getConnection();

@@ -264,7 +264,7 @@ public class LibraryModel {
             sql.append(" LIMIT " + pageNo + ", " + pageSize);
         }
 
-        ArrayList<LibraryBean> list = new ArrayList<>();
+        ArrayList<LibraryBean> list = new ArrayList();
         Connection conn = null;
 
         try {

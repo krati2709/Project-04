@@ -282,7 +282,7 @@ public class RoleModel {
         }
 
         Connection conn = null;
-        ArrayList<RoleBean> list = new ArrayList<>();
+        ArrayList<RoleBean> list = new ArrayList();
 
         try {
             conn = JDBCDataSource.getConnection();

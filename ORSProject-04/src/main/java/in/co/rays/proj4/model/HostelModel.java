@@ -281,7 +281,7 @@ public class HostelModel {
         }
 
         Connection conn = null;
-        ArrayList<HostelBean> list = new ArrayList<>();
+        ArrayList<HostelBean> list = new ArrayList();
 
         try {
             conn = JDBCDataSource.getConnection();

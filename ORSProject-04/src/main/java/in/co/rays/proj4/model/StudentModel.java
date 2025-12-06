@@ -288,7 +288,7 @@ public class StudentModel {
             sql.append(" limit " + pageNo + ", " + pageSize);
         }
 
-        ArrayList<StudentBean> list = new ArrayList<>();
+        ArrayList<StudentBean> list = new ArrayList();
         Connection conn = null;
         try {
             conn = JDBCDataSource.getConnection();
