@@ -19,7 +19,9 @@
 <script src="/ORSProject-04/js/datepicker.js"></script>
 </head>
 <body>
-
+<img src="img/customLogo.jpg" align="right" width="100" height="40"
+			border="0">
+	</div>		
 	<%
 		UserBean user = (UserBean) session.getAttribute("user");
 	%>
@@ -31,7 +33,7 @@
 		<%=user.getFirstName()%>
 		(<%=session.getAttribute("role")%>)
 	</h3>
-
+	</h3>
 	<a href="<%=ORSView.USER_CTL%>"><b>Add User</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.USER_LIST_CTL%>"><b>User List</b></a>
@@ -73,26 +75,19 @@
 	<b>|</b>
 	<a href="<%=ORSView.TIMETABLE_LIST_CTL%>"><b>Timetable List</b></a>
 	<b>|</b>
-	<a href="<%=ORSView.DEPARTMENT_CTL%>"><b>Add Department</b></a>
-	<b>|</b>
-	<a href="<%=ORSView.DEPARTMENT_LIST_CTL%>"><b>Department List</b></a>
-	<b>|</b>
 	<a href="<%=ORSView.MY_PROFILE_CTL%>"><b>My Profile</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.CHANGE_PASSWORD_CTL%>"><b>change password</b></a>
 	<b>|</b>
-	<a href="doc/index.html" target="blank"><b>Java Doc</b></a>
+	<a href="<%=ORSView.JAVA_DOC%>" target="blank"><b>Java Doc</b></a>
 	<b>|</b>
-	<a href="LoginCtl?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
+	<a href="<%=ORSView.LOGIN_CTL%>?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 	<%
 		} else {
 	%>
-	<div>
 	<h3>Hi, Guest</h3>
-	
-	<a href="WelcomeCtl"><b>Welcome</b></a> |
-	<a href="LoginCtl"><b>Login</b></a>
-	</div>
+	<a href="<%=ORSView.WELCOME_CTL%>"><b>Welcome</b></a> |
+	<a href="<%=ORSView.LOGIN_CTL%>"><b>Login</b></a>
 	<%
 		}
 	%>

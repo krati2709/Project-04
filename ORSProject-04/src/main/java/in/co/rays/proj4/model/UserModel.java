@@ -510,6 +510,7 @@ public class UserModel {
      * @throws ApplicationException if a database or email error occurs
      */
     public long registerUser(UserBean bean) throws DuplicateRecordException, ApplicationException {
+    	
         long pk = add(bean);
 
         HashMap<String, String> map = new HashMap<String, String>();

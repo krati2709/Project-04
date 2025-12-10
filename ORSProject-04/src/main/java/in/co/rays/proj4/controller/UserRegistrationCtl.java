@@ -42,6 +42,8 @@ public class UserRegistrationCtl extends BaseCtl {
     protected boolean validate(HttpServletRequest request) {
 
         boolean pass = true;
+        
+ 
 
         if (DataValidator.isNull(request.getParameter("firstName"))) {
             request.setAttribute("firstName", PropertyReader.getValue("error.require", "First Name"));
@@ -162,7 +164,7 @@ public class UserRegistrationCtl extends BaseCtl {
         if (OP_SIGN_UP.equalsIgnoreCase(op)) {
             UserBean bean = (UserBean) populateBean(request);
             try {
-                long pk = model.add(bean);
+                long pk = model.registerUser(bean);
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setSuccessMessage("Registration successful!", request);
             } catch (DuplicateRecordException e) {

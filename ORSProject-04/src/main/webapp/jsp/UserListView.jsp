@@ -91,8 +91,8 @@
                 %>
 
                 <tr>
-                    <td style="text-align: center;">
-                        <input type="checkbox" name="ids" value="<%=bean.getId()%>"
+                    <td style="text-align: center;"><input type="checkbox"
+						class="case" name="ids" value="<%=bean.getId()%>"
                             <%= (user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN) ? "disabled" : "" %>>
                     </td>
                     <td style="text-align: center;"><%=index++%></td>
@@ -148,6 +148,5 @@
             %>
         </form>
     </div>
-    <%@ include file="Footer.jsp"%>
 </body>
 </html>
