@@ -364,8 +364,8 @@ public class UserModel {
                 sql.append(" and login like '" + bean.getLogin() + "%'");
             if (bean.getPassword() != null && bean.getPassword().length() > 0)
                 sql.append(" and password like '" + bean.getPassword() + "%'");
-            if (bean.getDob() != null && bean.getDob().getDate() > 0)
-                sql.append(" and dob = " + bean.getDob());
+            if (bean.getDob() != null && bean.getDob().getTime() > 0)
+                sql.append(" and dob = " + new java.sql.Date(bean.getDob().getTime()));
             if (bean.getMobileNo() != null && bean.getMobileNo().length() > 0)
                 sql.append(" and mobile_no = " + bean.getMobileNo());
             if (bean.getRoleId() > 0)

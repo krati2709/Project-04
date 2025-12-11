@@ -219,7 +219,7 @@ public interface ORSView {
     /** Faculty List Controller URL */
     public String FACULTY_LIST_CTL = APP_CONTEXT + "/ctl/FacultyListCtl";
     
-    public String JAVA_DOC = APP_CONTEXT + "doc/index.html";
+
 
     // -----------------------------------------------------------
     // Error Page
@@ -262,4 +262,8 @@ public interface ORSView {
 
     /** Hostel List Controller URL */
     public String HOSTEL_LIST_CTL = APP_CONTEXT + "/ctl/HostelListCtl";
+    
+    public String JAVA_DOC = APP_CONTEXT + "/doc/index.html";
+    
+    public String IMG_LOGO = APP_CONTEXT + "/img/customLogo.jpg";
 }
