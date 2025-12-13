@@ -265,5 +265,5 @@ public interface ORSView {
     
     public String JAVA_DOC = APP_CONTEXT + "/doc/index.html";
     
-    public String IMG_LOGO = APP_CONTEXT + "/img/customLogo.jpg";
+    public String IMG_LOGO = "img/customLogo.jpg";
 }

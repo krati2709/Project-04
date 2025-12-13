@@ -19,7 +19,7 @@
 <script src="/ORSProject-04/js/datepicker.js"></script>
 </head>
 <body>
-<img src="img/customLogo.jpg" align="right" width="100" height="40"
+<img src="<%=ORSView.APP_CONTEXT%>/img/customLogo.jpg" align="right" width="100" height="40"
 			border="0">
 	</div>		
 	<%

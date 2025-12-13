@@ -528,5 +528,6 @@ public class UserModel {
         EmailUtility.sendMail(msg);
 
         return pk;
+        
     }
 }
