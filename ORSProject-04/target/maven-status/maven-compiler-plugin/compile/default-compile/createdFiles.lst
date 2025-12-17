@@ -16,6 +16,7 @@ in\co\rays\proj4\model\TimetableModel.class
 in\co\rays\proj4\bean\MarksheetBean.class
 in\co\rays\proj4\controller\TimetableListCtl.class
 in\co\rays\proj4\bean\DepartmentBean.class
+in\co\rays\proj4\controller\ErrorCtl.class
 in\co\rays\proj4\util\DataUtility.class
 in\co\rays\proj4\util\EmailUtility$1.class
 in\co\rays\proj4\util\ServletUtility.class

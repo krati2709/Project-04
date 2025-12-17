@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CourseBean;
 import in.co.rays.proj4.bean.RoleBean;
@@ -32,6 +34,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "CourseCtl", urlPatterns = { "/ctl/CourseCtl" })
 public class CourseCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(CourseCtl.class);
 
     /**
      * Validates input fields of Course form.
@@ -42,6 +46,8 @@ public class CourseCtl extends BaseCtl {
     @Override
     protected boolean validate(HttpServletRequest request) {
 
+    	log.debug("CourseCtl Method validate Started");
+    	
         boolean pass = true;
 
         if (DataValidator.isNull(request.getParameter("name"))) {
@@ -62,6 +68,8 @@ public class CourseCtl extends BaseCtl {
             pass = false;
         }
 
+        log.debug("CourseCtl Method validate ended");
+        
         return pass;
     }
 
@@ -74,6 +82,8 @@ public class CourseCtl extends BaseCtl {
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
 
+    	log.debug("CourseCtl Method populatebean Started");
+    	
         CourseBean bean = new CourseBean();
 
         bean.setId(DataUtility.getLong(request.getParameter("id")));
@@ -83,7 +93,9 @@ public class CourseCtl extends BaseCtl {
 
         populateDTO(bean, request);
 
+        log.debug("CourseCtl Method populatebean ended");
         return bean;
+        
     }
 
     /**
@@ -98,6 +110,7 @@ public class CourseCtl extends BaseCtl {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	log.debug("CourseCtl Method doGet Started");
         long id = DataUtility.getLong(request.getParameter("id"));
         CourseModel model = new CourseModel();
 
@@ -106,13 +119,17 @@ public class CourseCtl extends BaseCtl {
                 CourseBean bean = model.findByPk(id);
                 ServletUtility.setBean(bean, request);
             } catch (ApplicationException e) {
+            	log.error(e);
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
             }
+        	
+
         }
 
         ServletUtility.forward(getView(), request, response);
+        log.debug("CourseCtl Method doGet ended");
     }
 
     /**
@@ -127,6 +144,7 @@ public class CourseCtl extends BaseCtl {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	log.debug("CourseCtl Method doPost started");
         String op = DataUtility.getString(request.getParameter("operation"));
         CourseModel model = new CourseModel();
         long id = DataUtility.getLong(request.getParameter("id"));
@@ -139,9 +157,11 @@ public class CourseCtl extends BaseCtl {
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setSuccessMessage("User added successfully", request);
             } catch (DuplicateRecordException e) {
+            	log.error(e);
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setErrorMessage("Login Id already exists", request);
             } catch (ApplicationException e) {
+            	log.error(e);
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
@@ -157,9 +177,11 @@ public class CourseCtl extends BaseCtl {
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setSuccessMessage("User updated successfully", request);
             } catch (DuplicateRecordException e) {
+            	log.error(e);
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setErrorMessage("Login Id already exists", request);
             } catch (ApplicationException e) {
+            	log.error(e);
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
@@ -175,6 +197,7 @@ public class CourseCtl extends BaseCtl {
         }
 
         ServletUtility.forward(getView(), request, response);
+        log.debug("CourseCtl Method doPost ended");
     }
 
     /**

@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
@@ -31,6 +33,8 @@ public class UserRegistrationCtl extends BaseCtl {
 
     /** Operation constant for user sign-up. */
     public static final String OP_SIGN_UP = "Sign Up";
+    
+    private static Logger log = Logger.getLogger(UserRegistrationCtl.class);
 
     /**
      * Validates user registration form fields.
@@ -40,6 +44,8 @@ public class UserRegistrationCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	
+    	log.debug("UserRegistrationCtl Method validate started");
 
         boolean pass = true;
         
@@ -114,6 +120,8 @@ public class UserRegistrationCtl extends BaseCtl {
             request.setAttribute("mobileNo", "Invalid Mobile No");
             pass = false;
         }
+        
+        log.debug("UserRegistrationCtl Method validate ended");
 
         return pass;
     }
@@ -126,6 +134,8 @@ public class UserRegistrationCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("UserRegistrationCtl Method populate started");
 
         UserBean bean = new UserBean();
 
@@ -140,6 +150,8 @@ public class UserRegistrationCtl extends BaseCtl {
         bean.setRoleId(RoleBean.STUDENT);
 
         populateDTO(bean, request);
+        
+        log.debug("UserRegistrationCtl Method populate ended");
 
         return bean;
     }
@@ -157,6 +169,8 @@ public class UserRegistrationCtl extends BaseCtl {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("UserRegistrationCtl Method doPost started");
 
         String op = DataUtility.getString(request.getParameter("operation"));
         UserModel model = new UserModel();
@@ -180,6 +194,8 @@ public class UserRegistrationCtl extends BaseCtl {
             ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
             return;
         }
+        
+        log.debug("UserRegistrationCtl Method doPost ended");
     }
 
     /**

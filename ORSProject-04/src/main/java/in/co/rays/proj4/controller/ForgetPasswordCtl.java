@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -25,6 +27,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "ForgetPasswordCtl", urlPatterns = { "/ForgetPasswordCtl" })
 public class ForgetPasswordCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(ForgetPasswordCtl.class);
 
     /**
      * Validates login (email) field.
@@ -35,6 +39,8 @@ public class ForgetPasswordCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	
+    	log.debug("ForgetPasswordCtl Method validate started");
 
         boolean pass = true;
 
@@ -45,6 +51,8 @@ public class ForgetPasswordCtl extends BaseCtl {
             request.setAttribute("login", PropertyReader.getValue("error.email", "Login "));
             pass = false;
         }
+        log.debug("ForgetPasswordCtl Method validate ended");
+
 
         return pass;
     }
@@ -57,12 +65,17 @@ public class ForgetPasswordCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	log.debug("ForgetPasswordCtl Method populate started");
+
 
         UserBean bean = new UserBean();
 
         bean.setLogin(DataUtility.getString(request.getParameter("login")));
 
+        log.debug("ForgetPasswordCtl Method populate ended");
+
         return bean;
+        
     }
 
     /**
@@ -90,9 +103,12 @@ public class ForgetPasswordCtl extends BaseCtl {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	log.debug("ForgetPasswordCtl Method doPost started");
+
         String op = DataUtility.getString(request.getParameter("operation"));
 
         UserBean bean = (UserBean) populateBean(request);
+        
 
         UserModel model = new UserModel();
 
@@ -110,6 +126,8 @@ public class ForgetPasswordCtl extends BaseCtl {
             }
             ServletUtility.forward(getView(), request, response);
         }
+        log.debug("ForgetPasswordCtl Method doPost ended");
+
     }
 
     /**

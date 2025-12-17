@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.SubjectBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -37,6 +39,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "SubjectListCtl", urlPatterns = { "/ctl/SubjectListCtl" })
 public class SubjectListCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(SubjectListCtl.class);
 
     /**
      * Preloads the list of subjects and courses for search filters or dropdowns
@@ -46,6 +50,8 @@ public class SubjectListCtl extends BaseCtl {
      */
     @Override
     protected void preload(HttpServletRequest request) {
+    	
+    	log.debug("SubjectListCtl Method preload started ");
 
         SubjectModel subjectModel = new SubjectModel();
         CourseModel courseModel = new CourseModel();
@@ -60,6 +66,8 @@ public class SubjectListCtl extends BaseCtl {
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
+    	log.debug("SubjectListCtl Method preload ended");
+
     }
 
     /**
@@ -73,6 +81,9 @@ public class SubjectListCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("SubjectListCtl Method populate started ");
+
 
         SubjectBean bean = new SubjectBean();
 
@@ -81,6 +92,8 @@ public class SubjectListCtl extends BaseCtl {
         bean.setDescription(DataUtility.getString(request.getParameter("description")));
         bean.setCourseId(DataUtility.getLong(request.getParameter("courseId")));
         bean.setId(DataUtility.getLong(request.getParameter("subjectId")));
+
+    	log.debug("SubjectListCtl Method populate ended");
 
         return bean;
     }
@@ -99,6 +112,9 @@ public class SubjectListCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("SubjectListCtl Method doget started ");
+
 
         int pageNo = 1;
         int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
@@ -126,6 +142,9 @@ public class SubjectListCtl extends BaseCtl {
             e.printStackTrace();
             ServletUtility.handleException(e, request, response);
         }
+        
+    	log.debug("SubjectListCtl Method doGet ended");
+
     }
 
     /**
@@ -140,6 +159,8 @@ public class SubjectListCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	log.debug("SubjectListCtl Method doPost started ");
+
         List list = null;
         List next = null;
 
@@ -211,6 +232,8 @@ public class SubjectListCtl extends BaseCtl {
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
+    	log.debug("SubjectListCtl Method doPost ended");
+
     }
 
     /**

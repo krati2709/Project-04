@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.bean.StudentBean;
@@ -36,6 +38,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "StudentCtl", urlPatterns = { "/ctl/StudentCtl" })
 public class StudentCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(StudentCtl.class);
 
     /**
      * Preloads data required for Student form.
@@ -48,6 +52,9 @@ public class StudentCtl extends BaseCtl {
      */
     @Override
     protected void preload(HttpServletRequest request) {
+    	
+    	log.debug("StudentCtl Method preload Started");
+    	
         CollegeModel collegemodel = new CollegeModel();
         try {
             List<CollegeBean> collegeList = collegemodel.list();
@@ -55,6 +62,7 @@ public class StudentCtl extends BaseCtl {
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
+        log.debug("StudentCtl Method preload ended");
     }
 
     /**
@@ -69,6 +77,8 @@ public class StudentCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	
+    	log.debug("StudentCtl Method validate Started");
         boolean pass = true;
 
         if (DataValidator.isNull(request.getParameter("firstName"))) {
@@ -124,6 +134,7 @@ public class StudentCtl extends BaseCtl {
             pass = false;
         }
 
+        log.debug("StudentCtl Method validate ended");
         return pass;
     }
 
@@ -135,6 +146,8 @@ public class StudentCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("StudentCtl Method populate Started");
 
         StudentBean bean = new StudentBean();
 
@@ -148,6 +161,8 @@ public class StudentCtl extends BaseCtl {
         bean.setCollegeId(DataUtility.getLong(request.getParameter("collegeId")));
 
         populateDTO(bean, request);
+        
+        log.debug("StudentCtl Method populate ended ");
         return bean;
 
     }
@@ -166,6 +181,7 @@ public class StudentCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	log.debug("StudentCtl Method doget started ");
 
         long id = DataUtility.getLong(request.getParameter("id"));
 
@@ -182,6 +198,7 @@ public class StudentCtl extends BaseCtl {
             }
         }
         ServletUtility.forward(getView(), request, response);
+        log.debug("StudentCtl Method doget ended ");
     }
 
     /**
@@ -198,6 +215,7 @@ public class StudentCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	log.debug("StudentCtl Method doPost started ");
 
         String op = DataUtility.getString(request.getParameter("operation"));
 
@@ -243,6 +261,7 @@ public class StudentCtl extends BaseCtl {
             return;
         }
         ServletUtility.forward(getView(), request, response);
+        log.debug("StudentCtl Method doPost ended ");
     }
 
     /**

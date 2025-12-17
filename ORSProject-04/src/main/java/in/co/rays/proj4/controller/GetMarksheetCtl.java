@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.MarksheetBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -28,6 +30,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "GetMarksheetCtl", urlPatterns = { "/ctl/GetMarksheetCtl" })
 public class GetMarksheetCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(GetMarksheetCtl.class);
 
     /**
      * Validates user input for roll number.
@@ -37,6 +41,8 @@ public class GetMarksheetCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+		
+		log.debug("GetMarksheetCTL Method validate Started");
 
         boolean pass = true;
 
@@ -44,6 +50,8 @@ public class GetMarksheetCtl extends BaseCtl {
             request.setAttribute("rollNo", PropertyReader.getValue("error.require", "Roll Number"));
             pass = false;
         }
+        
+        log.debug("GetMarksheetCTL Method validate ended");
 
         return pass;
     }
@@ -56,17 +64,22 @@ public class GetMarksheetCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("GetMarksheetCTL Method populate Started");
 
         MarksheetBean bean = new MarksheetBean();
 
         bean.setRollNo(DataUtility.getString(request.getParameter("rollNo")));
 
+        log.debug("GetMarksheetCTL Method populate ended");
+        
         return bean;
     }
 
     /**
      * Displays the marksheet page.
      */
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServletUtility.forward(getView(), request, response);
@@ -82,6 +95,8 @@ public class GetMarksheetCtl extends BaseCtl {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("GetMarksheetCTL Method doPost Started");
 
         String op = DataUtility.getString(request.getParameter("operation"));
 
@@ -104,6 +119,8 @@ public class GetMarksheetCtl extends BaseCtl {
             }
         }
         ServletUtility.forward(getView(), request, response);
+        
+        log.debug("GetMarksheetCTL Method doPost ended");
     }
 
     /**

@@ -7,13 +7,33 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
-	
-		<br> <br> <br> <br> <br>
-		<br>
-		<h1 align="center">
-			<font size="10px" color="navy">Welcome to ORS</font>
-		</h1>
-		
+	<jsp:useBean id="bean" class="in.co.rays.proj4.bean.MarksheetBean"
+		scope="request"></jsp:useBean>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<h1 align="center">
+		<font size="10px" color="navy">Welcome to ORS</font>
+	</h1>
+
+	<%
+		if (user != null && user.getRoleId() == RoleBean.STUDENT) {
+	%>
+
+	<h2 align="center">
+		<a href="<%=ORSView.GET_MARKSHEET_CTL%>" style="color: maroon;">
+			get your Marksheet here </a>
+	</h2>
+
+
+	<%
+		}
+	%>
+
 	<%@ include file="Footer.jsp"%>
 </body>
 </html>

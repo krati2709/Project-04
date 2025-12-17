@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -31,6 +33,9 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "RoleListCtl", urlPatterns = { "/ctl/RoleListCtl" })
 public class RoleListCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(RoleListCtl.class);
+	
 
     /**
      * Preloads the data required for Role list page.
@@ -42,14 +47,19 @@ public class RoleListCtl extends BaseCtl {
      */
     @Override
     protected void preload(HttpServletRequest request) {
+    	
+    	log.debug("RoleListCtl Method preload Started");
         RoleModel roleModel = new RoleModel();
 
         try {
             List roleList = roleModel.list();
             request.setAttribute("roleList", roleList);
         } catch (ApplicationException e) {
+        	log.error(e);
             e.printStackTrace();
         }
+        
+        log.debug("RoleListCtl Method preload ended");
     }
 
     /**
@@ -60,11 +70,13 @@ public class RoleListCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	log.debug("RoleListCtl Method populate Started");
         RoleBean bean = new RoleBean();
 
         bean.setName(DataUtility.getString(request.getParameter("name")));
         bean.setId(DataUtility.getLong(request.getParameter("roleId")));
 
+        log.debug("RoleListCtl Method populate ended");
         return bean;
     }
 
@@ -82,6 +94,7 @@ public class RoleListCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    	log.debug("RoleListCtl Method doGet Started");
         int pageNo = 1;
         int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
@@ -104,10 +117,12 @@ public class RoleListCtl extends BaseCtl {
 
             ServletUtility.forward(getView(), request, response);
         } catch (ApplicationException e) {
+        	log.error(e);
             e.printStackTrace();
             ServletUtility.handleException(e, request, response);
             return;
         }
+        log.debug("RoleListCtl Method doGet ended");
     }
 
     /**
@@ -124,7 +139,10 @@ public class RoleListCtl extends BaseCtl {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List list = null;
+        
+    	log.debug("RoleListCtl Method doPost Started");
+    	
+    	List list = null;
         List next = null;
 
         int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
@@ -193,9 +211,12 @@ public class RoleListCtl extends BaseCtl {
             ServletUtility.forward(getView(), request, response);
 
         } catch (ApplicationException e) {
+        	log.error(e);
             e.printStackTrace();
             return;
         }
+        
+        log.debug("RoleListCtl Method doPost ended");
     }
 
     /**

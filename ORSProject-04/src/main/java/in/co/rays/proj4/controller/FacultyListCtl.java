@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.bean.FacultyBean;
@@ -26,6 +28,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "FacultyListCtl", urlPatterns = { "/ctl/FacultyListCtl" })
 public class FacultyListCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(FacultyListCtl.class);
 
     /**
      * Populates FacultyBean with request parameters (firstName, lastName, email).
@@ -35,6 +39,8 @@ public class FacultyListCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("FacultyListCtl Method populate started");
 
         FacultyBean bean = new FacultyBean();
 
@@ -42,6 +48,7 @@ public class FacultyListCtl extends BaseCtl {
         bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
         bean.setEmail(DataUtility.getString(request.getParameter("email")));
 
+        log.debug("FacultyListCtl Method populate started");
         return bean;
     }
 
@@ -56,6 +63,8 @@ public class FacultyListCtl extends BaseCtl {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("FacultyListCtl Method doGet started");
 
         int pageNo = 1;
         int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
@@ -80,8 +89,10 @@ public class FacultyListCtl extends BaseCtl {
             ServletUtility.forward(getView(), request, response);
 
         } catch (ApplicationException e) {
+        	log.error(e);
             e.printStackTrace();
         }
+        log.debug("FacultyListCtl Method doGet ended");
     }
 
     /**
@@ -96,6 +107,8 @@ public class FacultyListCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("FacultyListCtl Method doPost started");
 
         List list = null;
         List next = null;
@@ -166,9 +179,12 @@ public class FacultyListCtl extends BaseCtl {
             ServletUtility.forward(getView(), request, response);
 
         } catch (ApplicationException e) {
+        	log.error(e);
             e.printStackTrace();
             return;
         }
+        
+        log.debug("FacultyListCtl Method doPost ended");
 
     }
 
@@ -177,6 +193,7 @@ public class FacultyListCtl extends BaseCtl {
      *
      * @return FACULTY_LIST_VIEW constant from ORSView
      */
+    
     @Override
     protected String getView() {
         return ORSView.FACULTY_LIST_VIEW;

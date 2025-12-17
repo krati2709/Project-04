@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -27,6 +29,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "UserListCtl", urlPatterns = { "/ctl/UserListCtl" })
 public class UserListCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(UserListCtl.class);
 
     /**
      * Loads preload lists such as Role list to populate dropdown filters.
@@ -35,6 +39,9 @@ public class UserListCtl extends BaseCtl {
      */
     @Override
     protected void preload(HttpServletRequest request) {
+    	
+    	log.debug("UserListCtl Method preload started");
+    	
         RoleModel rolemodel = new RoleModel();
 
         try {
@@ -44,6 +51,7 @@ public class UserListCtl extends BaseCtl {
             e.printStackTrace();
         }
 
+        log.debug("UserListCtl Method preload ended");
     }
 
     /**
@@ -54,6 +62,8 @@ public class UserListCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("UserListCtl Method populate started");
 
         UserBean bean = new UserBean();
 
@@ -62,6 +72,7 @@ public class UserListCtl extends BaseCtl {
         bean.setRoleId(DataUtility.getLong(request.getParameter("roleId")));
         bean.setDob(DataUtility.getDate(request.getParameter("dob")));
 
+        log.debug("UserListCtl Method populate ended");
         return bean;
     }
 
@@ -74,6 +85,8 @@ public class UserListCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("UserListCtl Method doGet started");
 
         int pageNo = 1;
         int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
@@ -101,6 +114,7 @@ public class UserListCtl extends BaseCtl {
             e.printStackTrace();
             return;
         }
+        log.debug("UserListCtl Method doGet ended");
     }
 
     /**
@@ -113,6 +127,8 @@ public class UserListCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("UserListCtl Method doPost started");
 
         List list = null;
         List next = null;
@@ -186,6 +202,8 @@ public class UserListCtl extends BaseCtl {
             e.printStackTrace();
             return;
         }
+        
+        log.debug("UserListCtl Method doPost ended");
     }
 
     /**

@@ -9,9 +9,9 @@
 	href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16x16" />
 </head>
 <body>
-
+<%@ include file="Header.jsp"%>
 	<form action="<%=ORSView.LOGIN_CTL%>" method="post">
-		<%@ include file="Header.jsp"%>
+		
 
 		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
 			scope="request"></jsp:useBean>

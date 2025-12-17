@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.MarksheetBean;
 import in.co.rays.proj4.bean.StudentBean;
@@ -31,19 +33,25 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "MarksheetCtl", urlPatterns = { "/ctl/MarksheetCtl" })
 public class MarksheetCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(MarksheetCtl.class);
 
     /**
      * Loads the list of students for dropdown.
      */
     @Override
     protected void preload(HttpServletRequest request) {
+    	
+    	log.debug("MarksheetCtl Method preload Started");
         StudentModel studentModel = new StudentModel();
         try {
             List studentList = studentModel.list();
             request.setAttribute("studentList", studentList);
         } catch (ApplicationException e) {
+        	log.error(e);
             e.printStackTrace();
         }
+        log.debug("MarksheetCtl Method preload ended");
     }
 
     /**
@@ -51,6 +59,9 @@ public class MarksheetCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	
+    	log.debug("MarksheetCtl Method validate Started");
+    	
         boolean pass = true;
 
         if (DataValidator.isNull(request.getParameter("studentId"))) {
@@ -80,6 +91,8 @@ public class MarksheetCtl extends BaseCtl {
                 pass = false;
             }
         }
+        
+        log.debug("MarksheetCtl Method validate ended");
 
         return pass;
     }
@@ -89,6 +102,9 @@ public class MarksheetCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("MarksheetCtl Method populate Started");
+    	
         MarksheetBean bean = new MarksheetBean();
 
         bean.setId(DataUtility.getLong(request.getParameter("id")));
@@ -100,6 +116,8 @@ public class MarksheetCtl extends BaseCtl {
         bean.setStudentId(DataUtility.getLong(request.getParameter("studentId")));
 
         populateDTO(bean, request);
+        
+        log.debug("MarksheetCtl Method populate ended");
         return bean;
     }
 
@@ -110,6 +128,8 @@ public class MarksheetCtl extends BaseCtl {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	log.debug("MarksheetCtl Method doGet Started");
+    	
         long id = DataUtility.getLong(request.getParameter("id"));
         MarksheetModel model = new MarksheetModel();
 
@@ -125,6 +145,7 @@ public class MarksheetCtl extends BaseCtl {
         }
 
         ServletUtility.forward(getView(), request, response);
+        log.debug("MarksheetCtl Method doGet ended");
     }
 
     /**
@@ -133,6 +154,8 @@ public class MarksheetCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("MarksheetCtl Method doPost Started");
 
         String op = DataUtility.getString(request.getParameter("operation"));
         MarksheetModel model = new MarksheetModel();
@@ -168,6 +191,7 @@ public class MarksheetCtl extends BaseCtl {
         }
 
         ServletUtility.forward(getView(), request, response);
+        log.debug("MarksheetCtl Method doPost ended");
     }
 
     /**

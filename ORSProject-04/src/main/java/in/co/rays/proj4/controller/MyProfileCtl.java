@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -41,6 +43,9 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "MyProfileCtl", urlPatterns = { "/ctl/MyProfileCtl" })
 public class MyProfileCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(MyProfileCtl.class);
+	
 
     /** Operation constant for Change Password button. */
     public static final String OP_CHANGE_MY_PASSWORD = "Change Password";
@@ -53,6 +58,8 @@ public class MyProfileCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	
+    	log.debug("MyProfileCtl Method validate Started");
 
         boolean pass = true;
         String op = DataUtility.getString(request.getParameter("operation"));
@@ -109,6 +116,8 @@ public class MyProfileCtl extends BaseCtl {
             pass = false;
         }
 
+        log.debug("MyProfileCtl Method validate ended");
+        
         return pass;
     }
 
@@ -120,6 +129,8 @@ public class MyProfileCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("MyProfileCtl Method populate Started");
 
         UserBean bean = new UserBean();
 
@@ -132,6 +143,7 @@ public class MyProfileCtl extends BaseCtl {
         bean.setDob(DataUtility.getDate(request.getParameter("dob")));
 
         populateDTO(bean, request);
+        log.debug("MyProfileCtl Method populate ended");
         return bean;
     }
 
@@ -144,6 +156,8 @@ public class MyProfileCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("MyProfileCtl Method doGet Started");
 
         HttpSession session = request.getSession(true);
         UserBean user = (UserBean) session.getAttribute("user");
@@ -163,6 +177,8 @@ public class MyProfileCtl extends BaseCtl {
         }
 
         ServletUtility.forward(getView(), request, response);
+        
+        log.debug("MyProfileCtl Method doGet ended");
     }
 
     /**
@@ -174,6 +190,8 @@ public class MyProfileCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("MyProfileCtl Method doPost Started");
 
         HttpSession session = request.getSession(true);
         UserBean user = (UserBean) session.getAttribute("user");
@@ -200,14 +218,18 @@ public class MyProfileCtl extends BaseCtl {
                 ServletUtility.setSuccessMessage("Profile has been updated successfully.", request);
 
             } catch (DuplicateRecordException e) {
+            	log.error(e);
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setErrorMessage("Login ID already exists", request);
 
             } catch (ApplicationException e) {
+            	log.error(e);
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
             }
+            
+            
         }
 
         // Change Password operation
@@ -217,6 +239,7 @@ public class MyProfileCtl extends BaseCtl {
         }
 
         ServletUtility.forward(getView(), request, response);
+        log.debug("MyProfileCtl Method doPost ended");
     }
 
     /**

@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -29,6 +31,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "CollegeCtl", urlPatterns = { "/ctl/CollegeCtl" })
 public class CollegeCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(CollegeCtl.class);
 
     /**
      * Validates the request parameters for College entity.
@@ -39,6 +43,7 @@ public class CollegeCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	log.debug("CollegeCtl Method validate Started");
         boolean pass = true;
 
         if (DataValidator.isNull(request.getParameter("name"))) {
@@ -73,7 +78,7 @@ public class CollegeCtl extends BaseCtl {
             request.setAttribute("phoneNo", "Invalid Mobile No");
             pass = false;
         }
-
+        log.debug("CollegeCtl Method validate ended");
         return pass;
     }
 
@@ -85,6 +90,7 @@ public class CollegeCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	log.debug("CollegeCtl Method populatebean Started");
         CollegeBean bean = new CollegeBean();
 
         bean.setId(DataUtility.getLong(request.getParameter("id")));
@@ -95,6 +101,7 @@ public class CollegeCtl extends BaseCtl {
         bean.setPhoneNo(DataUtility.getString(request.getParameter("phoneNo")));
 
         populateDTO(bean, request);
+        log.debug("CollegeCtl Method populatebean ended");
         return bean;
     }
 
@@ -110,6 +117,7 @@ public class CollegeCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	log.debug("CollegeCtl Method doGet Started");
         long id = DataUtility.getLong(request.getParameter("id"));
         CollegeModel model = new CollegeModel();
 
@@ -119,11 +127,13 @@ public class CollegeCtl extends BaseCtl {
                 ServletUtility.setBean(bean, request);
             } catch (ApplicationException e) {
                 e.printStackTrace();
+                log.error(e);
                 ServletUtility.handleException(e, request, response);
                 return;
             }
         }
         ServletUtility.forward(getView(), request, response);
+        log.debug("CollegeCtl Method doEnd ended");
     }
 
     /**
@@ -138,6 +148,7 @@ public class CollegeCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	log.debug("CollegeCtl Method doPost Started");
 
         String op = DataUtility.getString(request.getParameter("operation"));
         CollegeModel model = new CollegeModel();
@@ -150,9 +161,11 @@ public class CollegeCtl extends BaseCtl {
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setSuccessMessage("User added successfully", request);
             } catch (DuplicateRecordException e) {
+            	log.error(e);
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setErrorMessage("Login Id already exists", request);
             } catch (ApplicationException e) {
+            	log.error(e);
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
@@ -166,9 +179,11 @@ public class CollegeCtl extends BaseCtl {
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setSuccessMessage("User updated successfully", request);
             } catch (DuplicateRecordException e) {
+            	log.error(e);
                 ServletUtility.setBean(bean, request);
                 ServletUtility.setErrorMessage("Login Id already exists", request);
             } catch (ApplicationException e) {
+            	log.error(e);
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
@@ -181,6 +196,7 @@ public class CollegeCtl extends BaseCtl {
             return;
         }
         ServletUtility.forward(getView(), request, response);
+        log.debug("CollegeCtl Method doPost ended");
     }
 
     /**

@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
@@ -32,12 +34,15 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "UserCtl", urlPatterns = { "/ctl/UserCtl" })
 public class UserCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(UserCtl.class);
 
 	/**
 	 * Preloads list of roles to populate role dropdown in the form.
 	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
+		log.debug("UserCtl Method preload started");
 		RoleModel roleModel = new RoleModel();
 
 		try {
@@ -46,6 +51,7 @@ public class UserCtl extends BaseCtl {
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
+		log.debug("UserCtl Method preload ended");
 	}
 
 	/**
@@ -53,6 +59,9 @@ public class UserCtl extends BaseCtl {
 	 */
 	@Override
 	protected boolean validate(HttpServletRequest request) {
+		
+		log.debug("UserCtl Method validate started");
+		 
 		boolean pass = true;
 
 		// First Name Validation
@@ -140,7 +149,10 @@ public class UserCtl extends BaseCtl {
 			pass = false;
 		}
 
+		log.debug("UserCtl Method validate ended");
 		return pass;
+		
+		
 	}
 
 	/**
@@ -148,6 +160,9 @@ public class UserCtl extends BaseCtl {
 	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
+		
+		log.debug("UserCtl Method populate started");
+		
 		UserBean bean = new UserBean();
 
 		bean.setId(DataUtility.getLong(request.getParameter("id")));
@@ -162,6 +177,7 @@ public class UserCtl extends BaseCtl {
 		bean.setRoleId(DataUtility.getLong(request.getParameter("roleId")));
 
 		populateDTO(bean, request);
+		log.debug("UserCtl Method populate ended");
 		return bean;
 	}
 
@@ -171,6 +187,8 @@ public class UserCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		log.debug("UserCtl Method doGet started");
 
 		long id = DataUtility.getLong(request.getParameter("id"));
 		UserModel model = new UserModel();
@@ -186,6 +204,7 @@ public class UserCtl extends BaseCtl {
 			}
 		}
 		ServletUtility.forward(getView(), request, response);
+		log.debug("UserCtl Method doGet ended");
 	}
 
 	/**
@@ -194,6 +213,8 @@ public class UserCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		log.debug("UserCtl Method doPost started");
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		UserModel model = new UserModel();
@@ -241,6 +262,7 @@ public class UserCtl extends BaseCtl {
 		}
 
 		ServletUtility.forward(getView(), request, response);
+		log.debug("UserCtl Method doPost ended");
 	}
 
 	/**

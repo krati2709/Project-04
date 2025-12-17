@@ -16,14 +16,11 @@ public class RoleBean extends BaseBean {
 	/** Student role constant */
 	public static final int STUDENT = 2;
 
-	/** College role constant */
-	public static final int COLLEGE = 3;
-
 	/** Kiosk role constant */
-	public static final int KIOSK = 4;
+	public static final int KIOSK = 3;
 
 	/** Faculty role constant */
-	public static final int FACULTY = 5;
+	public static final int FACULTY = 4;
 
 	/** Name of the role */
 	private String name;

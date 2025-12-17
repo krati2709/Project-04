@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -27,6 +29,8 @@ import in.co.rays.proj4.util.ServletUtility;
 @WebServlet(name = "CollegeListCtl", urlPatterns = { "/ctl/CollegeListCtl" })
 public class CollegeListCtl extends BaseCtl {
 
+	private static Logger log = Logger.getLogger(CollegeListCtl.class);
+	
 	/**
 	 * Preloads the list of Colleges to populate dropdowns on the JSP page.
 	 *
@@ -34,6 +38,7 @@ public class CollegeListCtl extends BaseCtl {
 	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
+		
 		CollegeModel collegeModel = new CollegeModel();
 
 		try {
@@ -41,6 +46,7 @@ public class CollegeListCtl extends BaseCtl {
 			request.setAttribute("collegeList", collegeList);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
+			log.error(e);
 		}
 	}
 
@@ -72,6 +78,7 @@ public class CollegeListCtl extends BaseCtl {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		log.debug("CollegeListCtl doGet Start");
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
@@ -95,10 +102,12 @@ public class CollegeListCtl extends BaseCtl {
 			ServletUtility.forward(getView(), request, response);
 
 		} catch (ApplicationException e) {
+			log.error(e);
 			e.printStackTrace();
 			ServletUtility.handleException(e, request, response);
 			return;
 		}
+		log.debug("CollegeListCtl doGet ended");
 	}
 
 	/**
@@ -111,6 +120,9 @@ public class CollegeListCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		log.debug("CollegeListCtl doPost Start");
+		
 		List list = null;
 		List next = null;
 
@@ -180,9 +192,12 @@ public class CollegeListCtl extends BaseCtl {
 			ServletUtility.forward(getView(), request, response);
 
 		} catch (ApplicationException e) {
+			log.error(e);
 			e.printStackTrace();
 			return;
 		}
+		
+		log.debug("CollegeListCtl doPost ended");
 	}
 
 	/**

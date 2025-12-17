@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.TimetableBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -40,6 +42,8 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "TimetableCtl", urlPatterns = { "/ctl/TimetableCtl" })
 public class TimetableCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(TimetableCtl.class);
 
     /**
      * Preloads subjects and courses for dropdowns on the Timetable form.
@@ -48,6 +52,9 @@ public class TimetableCtl extends BaseCtl {
      */
     @Override
     protected void preload(HttpServletRequest request) {
+    	
+    	log.debug("TimetableCtl Method preload started");
+    	
         SubjectModel subjectModel = new SubjectModel();
         CourseModel courseModel = new CourseModel();
 
@@ -61,6 +68,8 @@ public class TimetableCtl extends BaseCtl {
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
+        
+        log.debug("TimetableCtl Method preload ended");
     }
 
     /**
@@ -74,6 +83,8 @@ public class TimetableCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	
+    	log.debug("TimetableCtl Method validate started");
 
         boolean pass = true;
 
@@ -113,6 +124,7 @@ public class TimetableCtl extends BaseCtl {
             pass = false;
         }
 
+        log.debug("TimetableCtl Method validate ended");
         return pass;
     }
 
@@ -124,6 +136,8 @@ public class TimetableCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	
+    	log.debug("TimetableCtl Method populate started");
 
         TimetableBean bean = new TimetableBean();
 
@@ -136,6 +150,8 @@ public class TimetableCtl extends BaseCtl {
         bean.setSubjectId(DataUtility.getLong(request.getParameter("subjectId")));
 
         populateDTO(bean, request);
+        
+        log.debug("TimetableCtl Method populate ended");
 
         return bean;
     }
@@ -152,6 +168,8 @@ public class TimetableCtl extends BaseCtl {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	log.debug("TimetableCtl Method doget started");
+    	
         long id = DataUtility.getLong(request.getParameter("id"));
 
         TimetableModel model = new TimetableModel();
@@ -166,7 +184,10 @@ public class TimetableCtl extends BaseCtl {
                 return;
             }
         }
+     
         ServletUtility.forward(getView(), request, response);
+        
+        log.debug("TimetableCtl Method doGEt ended");
     }
 
     /**
@@ -182,6 +203,8 @@ public class TimetableCtl extends BaseCtl {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("TimetableCtl Method doPost started");
 
         String op = DataUtility.getString(request.getParameter("operation"));
         TimetableModel model = new TimetableModel();
@@ -246,6 +269,8 @@ public class TimetableCtl extends BaseCtl {
             return;
         }
         ServletUtility.forward(getView(), request, response);
+        
+        log.debug("TimetableCtl Method doPost ended");
     }
 
     /**

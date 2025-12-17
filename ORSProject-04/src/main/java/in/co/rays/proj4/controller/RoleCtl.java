@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -31,6 +33,9 @@ import in.co.rays.proj4.util.ServletUtility;
  */
 @WebServlet(name = "RoleCtl", urlPatterns = { "/ctl/RoleCtl" })
 public class RoleCtl extends BaseCtl {
+	
+	private static Logger log = Logger.getLogger(RoleCtl.class);
+	
 
     /**
      * Validates input fields for Role form.
@@ -43,6 +48,8 @@ public class RoleCtl extends BaseCtl {
      */
     @Override
     protected boolean validate(HttpServletRequest request) {
+    	log.debug("RoleCtl Method validate Started");
+    	
         boolean pass = true;
 
         if (DataValidator.isNull(request.getParameter("name"))) {
@@ -53,6 +60,7 @@ public class RoleCtl extends BaseCtl {
             request.setAttribute("desc", PropertyReader.getValue("error.require", "Description"));
             pass = false;
         }
+    	log.debug("RoleCtl Method validate ended");
         return pass;
     }
 
@@ -64,6 +72,7 @@ public class RoleCtl extends BaseCtl {
      */
     @Override
     protected BaseBean populateBean(HttpServletRequest request) {
+    	log.debug("RoleCtl Method populate Started");
         RoleBean bean = new RoleBean();
 
         bean.setId(DataUtility.getLong(request.getParameter("id")));
@@ -71,6 +80,7 @@ public class RoleCtl extends BaseCtl {
         bean.setDescription(DataUtility.getString(request.getParameter("desc")));
 
         populateDTO(bean, request);
+    	log.debug("RoleCtl Method validate ended");
         return bean;
     }
 
@@ -88,6 +98,8 @@ public class RoleCtl extends BaseCtl {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("RoleCtl Method doGet Started");
 
         long id = DataUtility.getLong(request.getParameter("id"));
         RoleModel model = new RoleModel();
@@ -103,6 +115,7 @@ public class RoleCtl extends BaseCtl {
             }
         }
         ServletUtility.forward(getView(), request, response);
+    	log.debug("RoleCtl Method doGet ended");
     }
 
     /**
@@ -120,6 +133,8 @@ public class RoleCtl extends BaseCtl {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	log.debug("RoleCtl Method doPost Started");
 
         String op = DataUtility.getString(request.getParameter("operation"));
         RoleModel model = new RoleModel();
@@ -165,6 +180,7 @@ public class RoleCtl extends BaseCtl {
             return;
         }
         ServletUtility.forward(getView(), request, response);
+    	log.debug("RoleCtl Method doPost ended");
     }
 
     /**
