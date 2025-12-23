@@ -153,9 +153,7 @@ public class RoleCtl extends BaseCtl {
                 e.printStackTrace();
                 ServletUtility.handleException(e, request, response);
                 return;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            } 
         } else if (OP_UPDATE.equalsIgnoreCase(op)) {
             RoleBean bean = (RoleBean) populateBean(request);
             try {
